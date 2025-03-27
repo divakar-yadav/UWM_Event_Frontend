@@ -83,7 +83,7 @@ function Judgeinfo({ judge }) {
   );
 }
 
-const REACT_APP_API_URL= 'https://api.uwmsrpc.org/api'
+// const REACT_APP_API_URL= 'https://api.uwmsrpc.org/api'
 
 function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId }) {
 
@@ -96,7 +96,7 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId }) {
     // url to check if the poster id is valid or not
     // http://127.0.0.1:8000/precheckposter/round1_pre_check/ + round1PosterId
 
-    const response = await fetch(`${REACT_APP_API_URL}/precheckposter/round1_pre_check/` + round1PosterId, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/precheckposter/round1_pre_check/` + round1PosterId, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
