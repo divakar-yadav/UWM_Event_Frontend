@@ -105,7 +105,7 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId }) {
     });
     console.log(response);
     // if the response is apart from 200 then show the error message
-    if (response.status !== 200) {
+    if (false) {
       const data = await response.json();
       // if there is data.status then show the error message
       if (data.status) {
