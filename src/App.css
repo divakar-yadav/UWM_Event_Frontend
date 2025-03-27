@@ -1,0 +1,47 @@
+.container {
+  width: 70%;
+  margin: auto;
+  overflow: auto;
+  margin-top: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffee;
+}
+
+#successcontainer {
+  text-align: center;
+  overflow: auto;
+}
+#note {
+  display: block;
+}
+#mobile {
+  display: none;
+}
+
+#image {
+  width: 25%;
+  height: 25%;
+}
+#divider{
+  display: block;
+}
+
+@media screen and (max-width: 600px) {
+  #note {
+      display: none;
+  }
+  #mobile {
+      display: block;
+  }
+  #image {
+      width: 75%;
+      height: 75%;
+  }
+  #divider{
+      display: none;
+  }
+}

@@ -1,0 +1,1 @@
+docker build -t srpc_react:version_3 .

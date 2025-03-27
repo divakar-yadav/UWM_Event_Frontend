@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* General Styling */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffee !important;
+}
+
+.container {
+  width: 70% !important;
+  margin: auto;
+  overflow: auto;
+  margin-top: 10px;
+}
+
+.container-table {
+  width: 100% !important;
+  margin: auto;
+  overflow: auto;
+  margin-top: 10px;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 600px) {
+  .container {
+      width: 100% !important;
+  }
+  #note {
+      display: none;
+  }
+  #mobile {
+      display: block;
+  }
+  #image {
+      width: 75%;
+      height: 75%;
+  }
+  #divider {
+      display: none;
+  }
+}
+
+/* Score Entry Page */
+.bg-gradient-to-r {
+  background: linear-gradient(to right, #ffbd00, #eca600);
+}
+
+/* Card & Score Display */
+.container-card {
+  width: 100%;
+  margin: auto;
+  overflow: auto;
+  margin-top: 10px;
+}
+
+.score-card {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.student-name {
+  color: #000000;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.round-badge {
+  background-color: #000000;
+  color: #ffbd00;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Edit Score Button */
+.edit-score-btn {
+  background-color: #000000 !important;
+  color: #ffbd00 !important;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-score-btn:hover {
+  background-color: #333333;
+  color: #ffbd00;
+  border: none;
+}
+
+/* Round One & Round Two Forms */
+.roundone-container,
+.roundtwo-container {
+  background-color: #ffbd00;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.roundone-form,
+.roundtwo-form {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.roundone-btn,
+.roundtwo-btn {
+  background-color: #000000 !important;
+  color: #ffbd00 !important;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.roundone-btn:hover,
+.roundtwo-btn:hover {
+  background-color: #333333;
+  color: #ffbd00;
+  border: none;
+}
+
+/* Search Section */
+.search-container {
+  margin: 20px auto;
+  width: 50%;
+  text-align: center;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.search-button {
+  background-color: #000000;
+  color: #ffbd00;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #333333;
+}
+
+/* Search Results */
+.search-results {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.result-card {
+  background-color: #ffffff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}

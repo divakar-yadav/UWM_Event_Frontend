@@ -1,0 +1,33 @@
+.loader {
+    top: 50%; /* Positions the loader 50% from the top of the page */
+    left: 50%; /* Positions the loader 50% from the left of the page */
+    transform: translate(-50%, -50%); /* Centers the loader precisely */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures the loader covers the entire height of the page */
+    width: 100%; /* Ensures the loader covers the entire width of the page */
+    z-index: 999; /* Ensures the loader appears on top of other elements */
+    background-color: #ffbd00;
+  }
+  
+  .spinner {
+    height: 10vh;
+    width: 10vh;
+    border: 6px solid rgba(0, 174, 239, 0.2);
+    border-top-color: rgba(0, 174, 239, 0.8);
+    border-radius: 100%;
+    animation: rotation 0.6s infinite linear 0.25s;
+    opacity: 1; /* Set opacity to 1 to ensure the spinner is visible */
+    position: relative; /* Allows the spinner to be positioned relative to the loader */
+  }
+  
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+  

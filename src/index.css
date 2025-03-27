@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.container {
+  width: 70% !important;
+  margin: auto;
+  overflow: auto;
+  margin-top: 10px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffee !important;
+}
+
+#successcontainer {
+  text-align: center;
+  overflow: auto;
+}
+#note  {
+  display: block; 
+}
+#mobile {
+  display: none;
+}
+
+#image {
+  width: 25%;
+  height: 25%;
+}
+#divider{
+  display: block;
+}
+
+.container-table {
+  width: 100% !important;
+  margin: auto;
+  overflow: auto;
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  #note {
+      display: none;
+  }
+  #mobile {
+      display: block;
+  }
+  #image {
+      width: 75%;
+      height: 75%;
+  }
+  #divider{
+      display: none;
+  }
+  .container {
+      width: 100% !important;
+  }
+}

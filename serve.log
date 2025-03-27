@@ -1,0 +1,51 @@
+ INFO  Accepting connections at http://localhost:4000
+ HTTP  4/8/2023 12:27:50 AM ::1 GET /
+ HTTP  4/8/2023 12:27:50 AM ::1 Returned 200 in 24 ms
+ HTTP  4/8/2023 12:27:50 AM ::1 GET /static/js/main.4392a61a.js
+ HTTP  4/8/2023 12:27:50 AM ::1 GET /static/css/main.e59342a5.css
+ HTTP  4/8/2023 12:27:50 AM ::1 Returned 200 in 7 ms
+ HTTP  4/8/2023 12:27:50 AM ::1 Returned 200 in 8 ms
+ HTTP  4/8/2023 12:27:50 AM ::1 GET /static/media/new_logo.77d0a2fc999e12905cec.png
+ HTTP  4/8/2023 12:27:50 AM ::1 Returned 200 in 1 ms
+ HTTP  4/8/2023 12:27:50 AM ::1 GET /favicon.ico
+ HTTP  4/8/2023 12:27:50 AM ::1 GET /manifest.json
+ HTTP  4/8/2023 12:27:50 AM ::1 Returned 200 in 1 ms
+ HTTP  4/8/2023 12:27:50 AM ::1 Returned 200 in 2 ms
+ HTTP  4/8/2023 12:27:50 AM ::1 GET /logo192.png
+ HTTP  4/8/2023 12:27:50 AM ::1 Returned 200 in 1 ms
+ HTTP  4/8/2023 12:28:17 AM ::1 GET /login
+ HTTP  4/8/2023 12:28:17 AM ::1 Returned 200 in 2 ms
+ HTTP  4/8/2023 12:28:17 AM ::1 GET /static/js/main.4392a61a.js
+ HTTP  4/8/2023 12:28:17 AM ::1 Returned 304 in 1 ms
+ HTTP  4/8/2023 12:28:17 AM ::1 GET /static/css/main.e59342a5.css
+ HTTP  4/8/2023 12:28:17 AM ::1 Returned 304 in 0 ms
+ HTTP  4/8/2023 12:28:17 AM ::1 GET /static/media/new_logo.77d0a2fc999e12905cec.png
+ HTTP  4/8/2023 12:28:17 AM ::1 Returned 304 in 0 ms
+ HTTP  4/8/2023 12:28:17 AM ::1 GET /manifest.json
+ HTTP  4/8/2023 12:28:17 AM ::1 Returned 304 in 1 ms
+ HTTP  4/8/2023 12:28:17 AM ::1 GET /logo192.png
+ HTTP  4/8/2023 12:28:17 AM ::1 Returned 304 in 1 ms
+ HTTP  4/8/2023 12:28:22 AM ::1 GET /static/css/main.e59342a5.css
+ HTTP  4/8/2023 12:28:22 AM ::1 Returned 304 in 1 ms
+ HTTP  4/8/2023 12:28:22 AM ::1 GET /manifest.json
+ HTTP  4/8/2023 12:28:22 AM ::1 Returned 304 in 1 ms
+ HTTP  4/8/2023 12:28:22 AM ::1 GET /static/js/main.4392a61a.js.map
+ HTTP  4/8/2023 12:28:22 AM ::1 Returned 200 in 4 ms
+ HTTP  4/8/2023 12:28:22 AM ::1 GET /static/css/main.e59342a5.css.map
+ HTTP  4/8/2023 12:28:22 AM ::1 Returned 200 in 3 ms
+ HTTP  4/8/2023 12:28:39 AM ::1 GET /poster
+ HTTP  4/8/2023 12:28:39 AM ::1 Returned 200 in 1 ms
+ HTTP  4/8/2023 12:28:39 AM ::1 GET /static/js/main.4392a61a.js
+ HTTP  4/8/2023 12:28:39 AM ::1 Returned 304 in 1 ms
+ HTTP  4/8/2023 12:28:39 AM ::1 GET /static/css/main.e59342a5.css
+ HTTP  4/8/2023 12:28:39 AM ::1 Returned 304 in 1 ms
+ HTTP  4/8/2023 12:28:39 AM ::1 GET /static/css/main.e59342a5.css.map
+ HTTP  4/8/2023 12:28:39 AM ::1 Returned 304 in 0 ms
+ HTTP  4/8/2023 12:28:39 AM ::1 GET /static/js/main.4392a61a.js.map
+ HTTP  4/8/2023 12:28:39 AM ::1 Returned 304 in 1 ms
+ HTTP  4/8/2023 12:28:39 AM ::1 GET /static/media/new_logo.77d0a2fc999e12905cec.png
+ HTTP  4/8/2023 12:28:39 AM ::1 Returned 304 in 1 ms
+ HTTP  4/8/2023 12:28:39 AM ::1 GET /manifest.json
+ HTTP  4/8/2023 12:28:39 AM ::1 Returned 304 in 1 ms
+ HTTP  4/8/2023 12:28:39 AM ::1 GET /logo192.png
+ HTTP  4/8/2023 12:28:39 AM ::1 Returned 304 in 1 ms

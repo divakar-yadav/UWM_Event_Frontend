@@ -1,0 +1,33 @@
+.container-card {
+    /* background-color: #ffbd00; */
+    /* padding: 2rem; */
+    border-radius: 1rem;
+  }
+  
+  .score-card {
+    background-color: #ffffff;
+  }
+  
+  .student-name {
+    color: #000000;
+  }
+  
+  .round-badge {
+    background-color: #000000;
+    color: #ffbd00;
+  }
+  
+  .edit-score-btn {
+    background-color: #000000 !important;
+    color: #ffbd00 !important;
+    border: none;
+  }
+  
+  .edit-score-btn:hover {
+    background-color: #333333;
+    color: #ffbd00;
+    border: none;
+  }
+  
+
+  
