@@ -51,7 +51,7 @@ function NavigationBar(props) {
 
     localStorage.removeItem('token');
     localStorage.removeItem('first_name');
-    window.location.href = "/";
+    // window.location.href = "/";
 
   };
   return (
