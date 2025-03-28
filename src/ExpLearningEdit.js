@@ -1,12 +1,18 @@
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
 
-import './index.css';
+import "./index.css";
+import './ScoreTableRound1.css';
+import './Roundtwo.css';
+
 import CountdownTimer from './CountdownTimer';
-import { useNavigate } from 'react-router-dom';
+import FeedbackComponent from "./FeedbackComponent";
+import { useParams, useNavigate } from 'react-router-dom';
 
 function ExpLearningEdit() {
   const { posterId } = useParams();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [reflectionScore, setReflectionScore] = useState(0);
   const [communicationScore, setCommunicationScore] = useState(0);
@@ -19,7 +25,6 @@ function ExpLearningEdit() {
   useEffect(() => {
     document.title = `Edit Poster Score`;
   }, []);
-  const navigate = useNavigate();
 
   useEffect(() => {
     let ignore = false;
@@ -77,9 +82,8 @@ function ExpLearningEdit() {
       setShowSuccess(true);
       setTimeout(() => {
         setShowSuccess(false);
-      }, 3000);
-      navigate('/judge/exp-learning')
-
+        navigate('/judge/exp-learning');
+      }, 2000);
     } else {
       const data = await response.json();
       setError(data?.error || 'Update failed');
@@ -98,15 +102,13 @@ function ExpLearningEdit() {
           <div className="bg-white rounded-lg p-6">
             <h1 className="text-xl font-bold mb-4">Edit Poster Score</h1>
 
-            {/* Success Message with Fixed Height */}
             <div style={{ height: '40px' }} className="mt-2">
-  {showSuccess && (
-    <div className="p-2 rounded bg-green-100 border border-green-300 text-green-800 text-sm transition-opacity duration-300">
-      ✅ Scores updated successfully!
-    </div>
-  )}
-</div>
-
+              {showSuccess && (
+                <div className="p-2 rounded bg-green-100 border border-green-300 text-green-800 text-sm transition-opacity duration-300">
+                  ✅ Scores updated successfully!
+                </div>
+              )}
+            </div>
 
             <form onSubmit={handleSubmit}>
               <FormInput label="Reflection Score (0-50)" value={reflectionScore} onChange={setReflectionScore} />

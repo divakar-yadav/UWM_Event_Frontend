@@ -54,14 +54,14 @@ function EditRound({ round }) {
   }, [posterIdRound, round]);
 
   if (loading) return <div>Loading...</div>;
-
+  const updateOrFirstTimeScoring = researchScore === 0 && communicationScore === 0 && presentationScore === 0 && feedback === "";
   return (
     <>
       <CountdownTimer targetDate={new Date('2023-04-22T09:00:00-05:00')} />
       <div className="bg-gradient-to-r from-ffbd00 to-[#eca600] min-h-screen py-6">
         <div className="container mx-auto max-w-3xl px-4">
           <div className="bg-white shadow-md rounded-lg p-8 mb-6">
-            <h1 className="text-3xl font-bold text-center mb-4">Edit Poster Score</h1>
+            <h1 className="text-3xl font-bold text-center mb-4">{updateOrFirstTimeScoring ? 'Enter' : 'Edit'} Poster Score</h1>
             <p className="text-gray-700 mb-2"><strong>Poster ID:</strong> {posterIdRound}</p>
             <p className="text-gray-700 mb-2"><strong>Poster Title:</strong> {posterTitle}</p>
             <p className="text-gray-700 mb-2"><strong>Student Name:</strong> {studentName}</p>

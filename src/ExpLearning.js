@@ -8,6 +8,7 @@ import './Roundtwo.css';
 
 import CountdownTimer from './CountdownTimer';
 import FeedbackComponent from "./FeedbackComponent";
+import { useNavigate } from 'react-router-dom';
 
 
 function ExpLearning() {
@@ -66,7 +67,7 @@ function Judgeinfo({ judge }) {
       <div className="container mx-auto px-4 py-6 sm:max-w-md md:max-w-lg lg:max-w-xl">
         <div className="bg-white shadow-md rounded-lg p-8 animate__animated animate__fadeIn">
           <h1 className="text-4xl font-bold text-center mb-6 animate__animated animate__fadeInDown">
-             Experiencial Learning Score Entry
+          Experiential Learning Score Entry
           </h1>
           <h2 className="mb-4"> Welcome {judge}!</h2>
           <br />
@@ -86,12 +87,14 @@ function Judgeinfo({ judge }) {
 function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId, setRound1Score }) {
 
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit1 = async (e) => {
     e.preventDefault();
     setLoading(true);
+    
     // url to check if the poster id is valid or not
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/explearning`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/explearning?poster_id=${round1PosterId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +107,6 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId, setRoun
     setRound1Score(data.Exp_learning_posters)
     // if the response is apart from 200 then show the error message
     if (response.status !== 200) {
-      const data = await response.json();
       // if there is data.status then show the error message
       if (data.status) {
         document.getElementById("poster-1-error").innerHTML = data.status;
@@ -118,7 +120,8 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId, setRoun
       }
     }
     else {
-      window.location.href = "/editscore/1/explearning/" + round1PosterId;
+      // window.location.href = "/editscore/1/explearning/" + round1PosterId;
+      navigate("/editscore/1/explearning/" + round1PosterId)
       setLoading(false);
     }
   }

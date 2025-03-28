@@ -5,6 +5,7 @@ import Badge from 'react-bootstrap/Badge';
 import "./index.css";
 import './ScoreTableRound1.css';
 import './Roundtwo.css';
+import { useNavigate } from 'react-router-dom';
 
 import CountdownTimer from './CountdownTimer';
 import FeedbackComponent from "./FeedbackComponent";
@@ -88,6 +89,7 @@ function Judgeinfo({ judge }) {
 function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId }) {
 
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
 
@@ -121,8 +123,9 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId }) {
     }
     else {
       // window.location.href = "/round/1/" + round1PosterId;
-      window.location.href = "/editscore/1/research-poster/" + round1PosterId;
-      setLoading(false);
+      // window.location.href = "/editscore/1/research-poster/" + round1PosterId;
+        navigate('/editscore/1/research-poster/' + round1PosterId);
+        setLoading(false);
     }
   }
 
