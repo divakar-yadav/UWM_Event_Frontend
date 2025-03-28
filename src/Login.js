@@ -70,7 +70,7 @@ function Login() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <h1 className="text-4xl font-bold text-center">Judge Login</h1>
             <p className="text-sm text-gray-600 text-center">
-              Please log in using the email address you registered with. Your password is your last name followed by 2024.
+              Please log in using the email address you registered with. Your password is your last name followed by 2025.
             </p>
 
             <div className="space-y-2">

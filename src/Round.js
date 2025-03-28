@@ -83,7 +83,7 @@ function Studentdetails({ round, posterIdRound, studentName, posterTitle, studen
             </button></a>
             <br />
             <br />
-            <h1>2024 Research Poster Competition</h1>
+            <h1>2025 Research Poster Competition</h1>
             {/* <hr /> */}
             <p className="text-lg"><span className="font-bold">Poster ID:</span> {posterIdRound}</p>
             <p className="text-lg"><span className="font-bold">Poster Title:</span> {posterTitle}</p>

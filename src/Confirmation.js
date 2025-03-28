@@ -28,7 +28,7 @@ function Confirmation() {
                         <br />
                         {/* Event title and date information */}
                         <h3 className="text-xl font-semibold my-4">
-                            2024 Student Research Poster Competition
+                            2025 Student Research Poster Competition
                         </h3>
                         {/* Confirmation message for the user */}
                         <p className="text-xl mb-4">
