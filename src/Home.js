@@ -30,6 +30,11 @@ const Home = () => {
             <li>Communication (up to 30 points)</li>
             <li>Appearance & Presentation (up to 20 points)</li>
           </ul>
+          <p className="text-sm mt-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-2 rounded">
+  <strong>Note for Judges:</strong><br />
+  <strong>IDs starting with 100:</strong> Undergraduate Research Poster<br />
+  <strong>IDs starting with 200:</strong> Graduate Research Poster
+</p>
         </div>
         
         <div className="bg-white shadow-md rounded-lg p-6 text-center relative">
@@ -40,6 +45,10 @@ const Home = () => {
             <li>Communication (up to 30 points)</li>
             <li>Appearance & Presentation (up to 20 points)</li>
           </ul>
+          <p className="text-sm mt-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-2 rounded">
+  <strong>Note for Judges:</strong><br />
+  <strong>IDs starting with 300:</strong> Experiential Learning
+</p>
         </div>
         
         <div className="bg-white shadow-md rounded-lg p-6 text-center relative">
@@ -51,6 +60,10 @@ const Home = () => {
             <li>Communication (up to 10 points)</li>
             <li>Overall Impression (up to 10 points)</li>
           </ul>
+          <p className="text-sm mt-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-2 rounded">
+  <strong>Note for Judges:</strong><br />
+  <strong>IDs starting with 400:</strong> Three Minute Thesis (3MT)
+</p>
         </div>
       </div>
 
