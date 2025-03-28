@@ -51,7 +51,8 @@ function NavigationBar(props) {
 
     localStorage.removeItem('token');
     localStorage.removeItem('first_name');
-    // window.location.href = "/";
+    console.log("Logged out");
+    window.location.href = "/";
 
   };
   return (
