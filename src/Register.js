@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import 'tailwindcss/tailwind.css';
 import CountdownTimer from './CountdownTimer';
-
+import './uwmstyle.css';
 function Register() {
 
 
@@ -174,11 +174,17 @@ function Register() {
               />
             </div>
             <Form.Group controlId="formBasicAlumni" className="mb-3">
-  <Form.Check 
-    type="checkbox" 
+  <Form.Check
+    type="checkbox"
     label={
-      <span style={{ color: 'red', fontWeight: 'bold' }}>
-        Check this box if you're an alumnus of the College of Engineering & Applied Science*
+      <span className="uwm-alumni-label">
+        {"Check this box if you're an alumnus of the College of Engineering & Applied Science*"
+          .split(" ")
+          .map((word, i) => (
+            <span key={i} className="uwm-animated-word" style={{ animationDelay: `${i * 0.2}s` }}>
+              {word}&nbsp;
+            </span>
+          ))}
       </span>
     }
     value={alumni}
@@ -186,7 +192,6 @@ function Register() {
     onChange={handleAlumniChange}
   />
 </Form.Group>
-
 
 
             {showFields && (

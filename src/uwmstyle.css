@@ -1,0 +1,16 @@
+.uwm-alumni-label {
+    font-weight: bold;
+    display: inline;
+  }
+  
+  .uwm-animated-word {
+    display: inline-block;
+    animation: uwmColorWave 2s infinite;
+  }
+  
+  @keyframes uwmColorWave {
+    0% { color: #ffcc00; }   
+    50% { color: #000000; }  
+    100% { color: #ffcc00; }
+  }
+  
