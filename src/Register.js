@@ -233,7 +233,7 @@ function Register() {
               <h5>Important:</h5>
               <ul>
                 <li>Your password will be automatically assigned and populated into the field below.</li> <br />
-                <li>Your password will be your last name, followed by 2025. If your last name is Smith, your password will be smith2024.</li> <br />
+                <li>Your password will be your last name, followed by 2025. If your last name is Smith, your password will be smith2025.</li> <br />
                 <li>On the day of the event, you will login using the email you are providing now and the automatically provided password.</li> <br />
               </ul>
             </div>
