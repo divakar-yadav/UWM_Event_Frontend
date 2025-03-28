@@ -27,7 +27,7 @@ function Register() {
 
   useEffect(() => {
     if (last_name) {
-      setPassword(last_name.toLowerCase().replace(/\s/g, '') + "2024");
+      setPassword(last_name.toLowerCase().replace(/\s/g, '') + "2025");
 
     }
   }, [last_name]);
@@ -173,10 +173,20 @@ function Register() {
                 required
               />
             </div>
-
             <Form.Group controlId="formBasicAlumni" className="mb-3">
-              <Form.Check type="checkbox" label="Are you an alumni of the College of Engineering & Applied Science?*" value={alumni} checked={alumni} onChange={handleAlumniChange} />
-            </Form.Group>
+  <Form.Check 
+    type="checkbox" 
+    label={
+      <span style={{ color: 'red', fontWeight: 'bold' }}>
+        Check this box if you're an alumnus of the College of Engineering & Applied Science*
+      </span>
+    }
+    value={alumni}
+    checked={alumni}
+    onChange={handleAlumniChange}
+  />
+</Form.Group>
+
 
 
             {showFields && (
@@ -218,7 +228,7 @@ function Register() {
               <h5>Important:</h5>
               <ul>
                 <li>Your password will be automatically assigned and populated into the field below.</li> <br />
-                <li>Your password will be your last name, followed by 2024. If your last name is Smith, your password will be Smith2024.</li> <br />
+                <li>Your password will be your last name, followed by 2025. If your last name is Smith, your password will be smith2024.</li> <br />
                 <li>On the day of the event, you will login using the email you are providing now and the automatically provided password.</li> <br />
               </ul>
             </div>
@@ -226,7 +236,7 @@ function Register() {
               <p>Important:</p>
               <ul>
                 <li>Your password will be automatically assigned and populated into the field below.</li> <br />
-                <li>Your password will be your last name, followed by 2024. If your last name is Smith, your password will be Smith2024.</li> <br />
+                <li>Your password will be your last name, followed by 2025. If your last name is Smith, your password will be Smith2025.</li> <br />
                 <li>On the day of the event, you will login using the email you are providing now and the automatically provided password.</li> <br />
               </ul>
             </div>
@@ -257,12 +267,12 @@ function Register() {
               {last_name ? (
                 <Form.Control
                   type="text"
-                  placeholder="Your password will be your Last Name followed by 2024"
-                  value={last_name.toLowerCase().replace(/\s/g, '') + "2024"} onChange={(e) => setPassword(e.target.value)} disabled />
+                  placeholder="Your password will be your Last Name followed by 2025"
+                  value={last_name.toLowerCase().replace(/\s/g, '') + "2025"} onChange={(e) => setPassword(e.target.value)} disabled />
               ) : (
                 <Form.Control
                   type="text"
-                  placeholder="Your password will be your Last Name followed by 2024"
+                  placeholder="Your password will be your Last Name followed by 2025"
                   value={password} onChange={(e) => setPassword(e.target.value)} disabled />
               )
               }
