@@ -47,7 +47,7 @@ function ExpLearningEdit() {
           setCommunicationScore(poster.communication_score || 0);
           setPresentationScore(poster.presentation_score || 0);
           setFeedback(poster.feedback || '');
-          setStudentId(poster.student || null); // ✅ Set student ID
+          setStudentId(poster.student_id || null); // ✅ Set student ID
         }
       } catch (err) {
         console.error('Failed to fetch poster data', err);
