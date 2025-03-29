@@ -18,6 +18,7 @@ function ExpLearningEdit() {
   const [communicationScore, setCommunicationScore] = useState(0);
   const [presentationScore, setPresentationScore] = useState(0);
   const [feedback, setFeedback] = useState('');
+  const [studentId, setStudentId] = useState(null); // ✅ New state
   const [error, setError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -40,11 +41,13 @@ function ExpLearningEdit() {
 
         if (!ignore && response.status === 200) {
           const data = await response.json();
+          console.log(data);
           const poster = data.Exp_learning_posters[0];
           setReflectionScore(poster.reflection_score || 0);
           setCommunicationScore(poster.communication_score || 0);
           setPresentationScore(poster.presentation_score || 0);
           setFeedback(poster.feedback || '');
+          setStudentId(poster.student || null); // ✅ Set student ID
         }
       } catch (err) {
         console.error('Failed to fetch poster data', err);
@@ -71,6 +74,7 @@ function ExpLearningEdit() {
       },
       body: JSON.stringify({
         poster_id: Number(posterId),
+        student: studentId, // ✅ Include student ID in update
         reflection_score: Number(reflectionScore),
         communication_score: Number(communicationScore),
         presentation_score: Number(presentationScore),
