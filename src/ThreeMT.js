@@ -4,12 +4,15 @@ import Badge from 'react-bootstrap/Badge';
 
 import CountdownTimer from './CountdownTimer';
 import FeedbackComponent from "./FeedbackComponent";
+import { useNavigate } from 'react-router-dom';
 
 import "./index.css";
 import './ScoreTableRound1.css';
 import './Roundtwo.css';
 
 function ThreeMT() {
+    const navigate = useNavigate();
+  
   useEffect(() => {
     document.title = "ThreeMT Score Entry Page";
   }, []);
@@ -57,28 +60,29 @@ function ThreeMT() {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    const data = await response.json();
-    console.log(data);
 
     // if the response is apart from 200 then show the error message
     if (response.status !== 200) {
       const data = await response.json();
       // if there is data.status then show the error message
       if (data.status) {
-        document.getElementById("poster-1-error").innerHTML = data.status;
-        document.getElementById("poster-1-error").style.color = "red";
+        alert(data.status);
+        // document.getElementById("poster-1-error").innerHTML = data.status;
+        // document.getElementById("poster-1-error").style.color = "red";
         setLoading(false);
       }
       else {
-        document.getElementById("poster-1-error").innerHTML = "Something went wrong, Please refresh the page; <button onClick={window.location.reload()}>Refresh</button>";
-        document.getElementById("poster-1-error").style.color = "red";
+        // document.getElementById("poster-1-error").innerHTML = "Something went wrong, Please refresh the page; <button onClick={window.location.reload()}>Refresh</button>";
+        // document.getElementById("poster-1-error").style.color = "red";
         setLoading(false);
       }
     }
     else {
-        setScores(data.ThreeMT_posters)
-        setStatus(true)
-        window.location.href = `/editscore/1/threemt/${posterId}`;
+        // setScores(data.ThreeMT_posters)
+        // setStatus(true)
+        // window.location.href = `/editscore/1/threemt/${posterId}`;
+        setLoading(false);
+        navigate("/editscore/threemt/" + posterId)
         setLoading(false);
     }
   }
@@ -195,7 +199,7 @@ function ScoreTable({ scores, status, judge }) {
                   <button
                     type="button"
                     className="btn edit-score-btn"
-                    onClick={() => window.location.href = `/editscore/1/threemt/${score.poster_id}`}
+                    onClick={() => window.location.href = `/editscore/threemt/${score.poster_id}`}
                   >
                     Edit Score
                   </button>

@@ -107,17 +107,20 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId, setRoun
     setRound1Score(data.Exp_learning_posters)
     // if the response is apart from 200 then show the error message
     if (response.status !== 200) {
+      alert(data.status)
+      setLoading(false);
+
       // if there is data.status then show the error message
-      if (data.status) {
-        document.getElementById("poster-1-error").innerHTML = data.status;
-        document.getElementById("poster-1-error").style.color = "red";
-        setLoading(false);
-      }
-      else {
-        document.getElementById("poster-1-error").innerHTML = "Something went wrong, Please refresh the page; <button onClick={window.location.reload()}>Refresh</button>";
-        document.getElementById("poster-1-error").style.color = "red";
-        setLoading(false);
-      }
+      // if (data.status) {
+      //   document.getElementById("poster-1-error").innerHTML = data.status;
+      //   document.getElementById("poster-1-error").style.color = "red";
+      //   setLoading(false);
+      // }
+      // else {
+      //   document.getElementById("poster-1-error").innerHTML = "Something went wrong, Please refresh the page; <button onClick={window.location.reload()}>Refresh</button>";
+      //   document.getElementById("poster-1-error").style.color = "red";
+      //   setLoading(false);
+      // }
     }
     else {
       // window.location.href = "/editscore/1/explearning/" + round1PosterId;

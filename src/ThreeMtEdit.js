@@ -14,6 +14,7 @@ function ThreeMTEdit() {
   const [error, setError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [studentId, setStudentId] = useState(null); // ✅ New state
 
   useEffect(() => {
     document.title = "Edit ThreeMT Score";
@@ -24,7 +25,7 @@ function ThreeMTEdit() {
     let ignore = false;
     const fetchData = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_URL}/three-mt?poster_ID=${posterId}`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/three-mt?poster_id=${posterId}`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -40,6 +41,7 @@ function ThreeMTEdit() {
             setCommunication(poster.communication || 0);
             setOverallImpression(poster.overall_impression || 0);
             setFeedback(poster.feedback || '');
+            setStudentId(poster.student || null);
           }
         }
       } catch (err) {
@@ -66,6 +68,7 @@ function ThreeMTEdit() {
       },
       body: JSON.stringify({
         poster_id: Number(posterId),
+        student:studentId,
         comprehension_content: comprehensionContent,
         engagement: engagement,
         communication: communication,

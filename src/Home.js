@@ -85,7 +85,7 @@ const Home = () => {
         </button>
 
         <button
-          className="w-full bg-gray-500 text-white py-3 px-6 rounded-lg shadow-md opacity-50 cursor-not-allowed"
+          className="w-full bg-black text-white py-3 px-6 rounded-lg shadow-md mb-4 hover:bg-gray-800 transition duration-300"
           onClick={() => navigate('/judge/three-mt')}
         >
           Begin Judging for the 3 Minute Thesis

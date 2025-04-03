@@ -68,7 +68,7 @@ function App() {
             <Route path="/round/1/:posterId" element={<PrivateRoute permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check/:id")}><Round round={1} /></PrivateRoute>} />
             {/* <Route path="/round/2/:posterId" element={<PrivateRoute permissionCheckUrl={getApiUrl("/precheckposter/round2_pre_check/:id")}><Round round={2} /></PrivateRoute>} /> */}
             <Route path="/editscore/1/research-poster/:posterId" element={<PrivateRoute scoring_type={'research-poster'} permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><EditRound round={1} /></PrivateRoute>} />
-            <Route path="/editscore/1/threemt/:posterId" element={<PrivateRoute  scoring_type={'threemt'} permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><ThreeMtEdit round={1} /></PrivateRoute>} />
+            <Route path="/editscore/threemt/:posterId" element={<PrivateRoute  scoring_type={'threemt'} permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><ThreeMtEdit round={1} /></PrivateRoute>} />
             <Route path="/editscore/1/explearning/:posterId" element={<PrivateRoute scoring_type={'explearning'}  permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><ExpLearningEdit round={1} /></PrivateRoute>} />
 
             {/* <Route path="/editscore/2/:posterId" element={<PrivateRoute permissionCheckUrl={getApiUrl("/precheckposter/round2_pre_check_edit/:id")}><EditRound round={2} /></PrivateRoute>} /> */}
