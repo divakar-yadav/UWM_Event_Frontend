@@ -1,6 +1,7 @@
 import { Navbar, Nav } from 'react-bootstrap';
 import logo from './images/new_logo.png';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ValidateToken = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -47,12 +48,15 @@ const ValidateToken = () => {
 
 
 function NavigationBar(props) {
+  const navigate = useNavigate();
+
   const handleLogout = async () => {
 
     localStorage.removeItem('token');
     localStorage.removeItem('first_name');
     console.log("Logged out");
-    window.location.href = "/";
+    navigate("/")
+
 
   };
   return (
