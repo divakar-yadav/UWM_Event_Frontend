@@ -112,13 +112,20 @@ function Login() {
 
             <p id="status" className="text-red-500 text-center"></p>
 
-            <button
+            {/* <button
               className={`w-full p-2 text-white font-bold rounded ${loading ? 'bg-gray-500' : 'bg-green-500'
                 }`}
               id="login-button"
               type="submit"
               disabled={loading}
-            >
+            > */}
+              <button
+                className={`w-full p-2 font-bold rounded ${loading ? 'bg-gray-500 text-white' : 'bg-black text-white hover:bg-gray-900'}`}
+                id="login-button"
+                type="submit"
+                disabled={loading}
+              >
+
               {loading ? (
                 <>
                   <span

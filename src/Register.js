@@ -283,8 +283,7 @@ function Register() {
               }
             </Form.Group>
             <button
-              className={`w-full p-2 text-white font-bold rounded ${loading ? 'bg-gray-500' : 'bg-green-500'
-                }`}
+              className={`w-full p-2 font-bold rounded ${loading ? 'bg-gray-500 text-white' : 'bg-black text-white hover:bg-gray-900'}`}
               id="Register-button"
               type="submit"
               disabled={loading}

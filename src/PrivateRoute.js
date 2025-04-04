@@ -67,9 +67,11 @@ const PrivateRoute = ({ permissionCheckUrl, children, scoring_type }) => {
         }
     }, [navigationTarget, navigate]);
     console.log({ isLoading, isAuthenticated, isAuthorized });
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
+    // if (isLoading) {
+    //     // return <div>Loading...</div>;
+    //     return <div></div>;
+
+    // }
     return children;
 };
 

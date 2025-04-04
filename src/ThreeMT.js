@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import Card from 'react-bootstrap/Card';
-import Badge from 'react-bootstrap/Badge';
+import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
+import Spinner from "react-bootstrap/Spinner"; // <-- Import Spinner
+import { useNavigate } from "react-router-dom";
 
-import CountdownTimer from './CountdownTimer';
+import CountdownTimer from "./CountdownTimer";
 import FeedbackComponent from "./FeedbackComponent";
-import { useNavigate } from 'react-router-dom';
 
 import "./index.css";
-import './ScoreTableRound1.css';
-import './Roundtwo.css';
+import "./ScoreTableRound1.css";
+import "./Roundtwo.css";
 
 function ThreeMT() {
-    const navigate = useNavigate();
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = "ThreeMT Score Entry Page";
   }, []);
@@ -25,73 +26,81 @@ function ThreeMT() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/home?scoring_type=threemt`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
-      const data = await response.json();
-      setJudge(data.Judge);
-      setScores(data.threemt_scores);
-      setStatus(data.status_of_threemt_table);
-      setLoading(false);
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/home?scoring_type=threemt`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setJudge(data.Judge);
+        setScores(data.threemt_scores);
+        setStatus(data.status_of_threemt_table);
+      } catch (err) {
+        console.error("Error fetching ThreeMT data:", err);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
   }, []);
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     window.location.href = `/editscore/1/threemt/${posterId}`;
-//   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    // url to check if the poster id is valid or not
-    // http://127.0.0.1:8000/precheckposter/round1_pre_check/ + round1PosterId
 
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/three-mt?poster_id=${posterId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/three-mt?poster_id=${posterId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
 
-    // if the response is apart from 200 then show the error message
-    if (response.status !== 200) {
-      const data = await response.json();
-      // if there is data.status then show the error message
-      if (data.status) {
-        alert(data.status);
-        // document.getElementById("poster-1-error").innerHTML = data.status;
-        // document.getElementById("poster-1-error").style.color = "red";
+      if (response.status !== 200) {
+        const data = await response.json();
+        if (data.status) {
+          alert(data.status);
+        } else {
+          alert("Something went wrong. Please refresh the page.");
+        }
         setLoading(false);
+      } else {
+        setLoading(false);
+        navigate("/editscore/threemt/" + posterId);
       }
-      else {
-        // document.getElementById("poster-1-error").innerHTML = "Something went wrong, Please refresh the page; <button onClick={window.location.reload()}>Refresh</button>";
-        // document.getElementById("poster-1-error").style.color = "red";
-        setLoading(false);
-      }
+    } catch (error) {
+      console.error("Error checking poster:", error);
+      setLoading(false);
+      alert("An error occurred. Please try again.");
     }
-    else {
-        // setScores(data.ThreeMT_posters)
-        // setStatus(true)
-        // window.location.href = `/editscore/1/threemt/${posterId}`;
-        setLoading(false);
-        navigate("/editscore/threemt/" + posterId)
-        setLoading(false);
-    }
+  };
+
+  // Show spinner while loading
+  if (loading) {
+    return (
+      <div className="text-center mt-5">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+        <p className="mt-3">Fetching ThreeMT Data...</p>
+      </div>
+    );
   }
-  if (loading) return <div>Loading...</div>;
 
   return (
     <>
-      <CountdownTimer targetDate={new Date('2023-04-22T09:00:00-05:00')} />
-
+      <CountdownTimer targetDate={new Date("2023-04-22T09:00:00-05:00")} />
       <div className="bg-gradient-to-r from-ffbd00 to-[#eca600]">
         <JudgeInfo judge={judge} />
         <div className="container">
@@ -116,9 +125,9 @@ function JudgeInfo({ judge }) {
         </h1>
         <h2 className="mb-4">Welcome {judge}!</h2>
         <p className="mb-4">
-          Thank you for being a judge today! Please enter scores numerically for one poster at a time.
-          Once you have clicked Submit Scores you will see all of your scores at the bottom of the page.
-          You can edit your scores later if necessary. To see the scoring rubric, click on Rubric on the above menu.
+          Thank you for being a judge today! Please enter scores for one poster
+          at a time. After submission, your scores appear below. You can edit
+          them as needed. Click "Rubric" in the top menu for more info.
         </p>
       </div>
     </div>
@@ -128,7 +137,7 @@ function JudgeInfo({ judge }) {
 function PosterInputForm({ posterId, setPosterId, handleSubmit }) {
   return (
     <div className="text-2xl font-bold text-center mb-4 bg-white shadow-md rounded-lg p-4">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="roundone-form">
         <div className="mb-3">
           <label htmlFor="posterId" className="block font-bold mb-1">
             Poster ID Number
@@ -163,31 +172,48 @@ function ScoreTable({ scores, status, judge }) {
         Posters Scored by <u>{judge}</u>
       </h3>
       <div className="row">
-        {scores.map((score) => (
-          <div className="col-md-4 mb-4" key={score.poster_id}>
+        {scores.map((score, index) => (
+          <div className="col-md-4 mb-4" key={index}>
             <Card className="h-100 shadow-sm rounded score-card">
               <Card.Body>
-                <Card.Title className="mb-3 student-name">Poster ID: {score.poster_id}</Card.Title>
+                {/* Additional fields from the updated API */}
+                <Card.Title className="mb-3 student-name">
+                  <strong>{score.student_name || "Unknown Student"}</strong>
+                </Card.Title>
+                <div className="mb-2">
+                  <strong>Poster Title:</strong>{" "}
+                  {score.poster_title || "No Title"}
+                </div>
 
-                <div className="d-flex justify-content-between mb-2">
-                  <div>Comprehension Content (0-10)</div>
-                  <div>{score.comprehension_content}</div>
+                <div className="d-flex justify-content-between align-items-center mb-2">
+                  <Badge pill className="round-badge">
+                    Poster ID: {score.poster_id}
+                  </Badge>
                 </div>
                 <div className="d-flex justify-content-between mb-2">
-                  <div>Engagement (0-10)</div>
-                  <div>{score.engagement}</div>
-                </div>
-                <div className="d-flex justify-content-between mb-2">
-                  <div>Communication (0-10)</div>
+                  <div><strong>Communication (0-10)</strong></div>
                   <div>{score.communication}</div>
                 </div>
                 <div className="d-flex justify-content-between mb-2">
-                  <div>Overall Impression(0-10)</div>
+                  <div><strong>Engagement (0-10)</strong></div>
+                  <div>{score.engagement}</div>
+                </div>
+                <div className="d-flex justify-content-between mb-2">
+                  <div><strong>Comprehension Content (0-10)</strong></div>
+                  <div>{score.comprehension_content}</div>
+                </div>
+                <div className="d-flex justify-content-between mb-2">
+                  <div><strong>Overall Impression (0-10)</strong></div>
                   <div>{score.overall_impression}</div>
                 </div>
                 <div className="d-flex justify-content-between mb-2">
-                  <div>Total Score (40)</div>
-                  <div>{score.comprehension_content + score.engagement + score.communication + score.overall_impression}</div>
+                  <div><strong>Total Score (40)</strong></div>
+                  <div>
+                    {(score.comprehension_content || 0) +
+                      (score.engagement || 0) +
+                      (score.communication || 0) +
+                      (score.overall_impression || 0)}
+                  </div>
                 </div>
                 <hr />
                 <div className="feedback-section mt-2">
@@ -199,7 +225,9 @@ function ScoreTable({ scores, status, judge }) {
                   <button
                     type="button"
                     className="btn edit-score-btn"
-                    onClick={() => window.location.href = `/editscore/threemt/${score.poster_id}`}
+                    onClick={() =>
+                      (window.location.href = `/editscore/threemt/${score.poster_id}`)
+                    }
                   >
                     Edit Score
                   </button>
