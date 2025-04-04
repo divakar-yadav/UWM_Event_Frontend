@@ -1,7 +1,6 @@
 import { Navbar, Nav } from 'react-bootstrap';
 import logo from './images/new_logo.png';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const ValidateToken = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -48,14 +47,11 @@ const ValidateToken = () => {
 
 
 function NavigationBar(props) {
-  const navigate = useNavigate();
-
   const handleLogout = async () => {
 
     localStorage.removeItem('token');
     localStorage.removeItem('first_name');
     console.log("Logged out");
-    navigate("/")
 
 
   };
@@ -80,7 +76,7 @@ function NavigationBar(props) {
               {/* <Nav.Link href="/">Rubric</Nav.Link> */}
               {/* <Nav.Link href="/">Score Entry Page</Nav.Link> */}
               {/* <Nav.Link href="/student-judged-count">Live Judged Count</Nav.Link> */}
-              <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+              <Nav.Link href="/" onClick={handleLogout}>Logout</Nav.Link>
             </Nav>
           ) : (
             <Nav className="me-auto">
