@@ -31,6 +31,10 @@ function ThreeMTEdit() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const [comprehensionError, setComprehensionError] = useState("");
+  const [engagementError, setEngagementError] = useState("");
+  const [communicationError, setCommunicationError] = useState("");
+  const [overallError, setOverallError] = useState("");
   useEffect(() => {
     document.title = "Edit ThreeMT Score";
   }, []);
@@ -116,10 +120,53 @@ function ThreeMTEdit() {
     setError("");
 
     // Convert the string values to integers (default to 0 if blank/NaN)
-    const comprehensionVal = parseInt(comprehensionContent, 10) || 0;
-    const engagementVal = parseInt(engagement, 10) || 0;
-    const communicationVal = parseInt(communication, 10) || 0;
-    const overallVal = parseInt(overallImpression, 10) || 0;
+    setComprehensionError("");
+  setEngagementError("");
+  setCommunicationError("");
+  setOverallError("");
+
+  let hasError = false;
+
+  if (comprehensionContent === "") {
+    setComprehensionError("Comprehension & Content score is Required");
+    hasError = true;
+  } else if (isNaN(comprehensionContent) || comprehensionContent < 0 || comprehensionContent > 10) {
+    setComprehensionError("Must be between 0–10");
+    hasError = true;
+  }
+
+  if (engagement === "") {
+    setEngagementError("Engagement score is Required");
+    hasError = true;
+  } else if (isNaN(engagement) || engagement < 0 || engagement > 10) {
+    setEngagementError("Must be between 0–10");
+    hasError = true;
+  }
+
+  if (communication === "") {
+    setCommunicationError("Communication score is Required");
+    hasError = true;
+  } else if (isNaN(communication) || communication < 0 || communication > 10) {
+    setCommunicationError("Must be between 0–10");
+    hasError = true;
+  }
+
+  if (overallImpression === "") {
+    setOverallError("Overall Impression score is Required");
+    hasError = true;
+  } else if (isNaN(overallImpression) || overallImpression < 0 || overallImpression > 10) {
+    setOverallError("Must be between 0–10");
+    hasError = true;
+  }
+
+  if (hasError) {
+    setSubmitLoading(false);
+    return;
+  }
+  const comprehensionVal = parseFloat(comprehensionContent);
+  const engagementVal = parseFloat(engagement);
+  const communicationVal = parseFloat(communication);
+  const overallVal = parseFloat(overallImpression);
 
     try {
       const res = await fetch(
@@ -192,24 +239,30 @@ function ThreeMTEdit() {
 
             <form onSubmit={handleSubmit}>
             <FormInput
-                label="Communication (0-10)"
-                value={communication}
-                onChange={setCommunication}
+                label="Comprehension & Content (0-10)"
+                value={comprehensionContent}
+                onChange={setComprehensionContent}
+                error={comprehensionError}
               />
+            
             <FormInput
                 label="Engagement (0-10)"
                 value={engagement}
                 onChange={setEngagement}
+                error={engagementError}
               />
+              
               <FormInput
-                label="Comprehension & Content (0-10)"
-                value={comprehensionContent}
-                onChange={setComprehensionContent}
+                label="Communication (0-10)"
+                value={communication}
+                onChange={setCommunication}
+                error={communicationError}
               />
               <FormInput
                 label="Overall Impression (0-10)"
                 value={overallImpression}
                 onChange={setOverallImpression}
+                error={overallError}
               />
 
               <div className="mb-4">
@@ -240,7 +293,7 @@ function ThreeMTEdit() {
   );
 }
 
-function FormInput({ label, value, onChange }) {
+function FormInput({ label, value, onChange, error }) {
   const handleChange = (e) => {
     onChange(e.target.value); // store raw string
   };
@@ -249,11 +302,14 @@ function FormInput({ label, value, onChange }) {
     <div className="mb-3">
       <label className="block text-gray-700 font-bold mb-1">{label}</label>
       <input
-        type="text"
+        type="number"
+        step="any"
+        inputMode="decimal"
+        pattern="[0-9]*"
         className="w-full border rounded px-3 py-2"
         value={value}
         onChange={handleChange}
-      />
+      />{error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 }

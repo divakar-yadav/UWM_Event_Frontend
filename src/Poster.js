@@ -88,7 +88,7 @@ function Judgeinfo({ judge }) {
     <div className="container mx-auto px-4 py-6 sm:max-w-md md:max-w-lg lg:max-w-xl">
       <div className="bg-white shadow-md rounded-lg p-8 animate__animated animate__fadeIn">
         <h1 className="text-4xl font-bold text-center mb-6 animate__animated animate__fadeInDown">
-          Research Poster Score Judging
+          Research Poster Score Entry
         </h1>
         <h2 className="mb-4">Welcome {judge}!</h2>
         <br />
@@ -154,7 +154,11 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId }) {
               </label>
               <input
                 type="number"
-                className="w-full p-2 border border-gray-300 rounded"
+                inputMode="numeric"
+                //min = "100"
+                //max = "299"
+                onWheel={(e) => e.target.blur()}
+                className="w-full p-2 border border-gray-300 rounded no-spinner"
                 id="posterId"
                 aria-describedby="posterId"
                 value={round1PosterId}
