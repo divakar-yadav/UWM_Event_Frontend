@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import RubricModel from "./RubricModel";
-
+import "./Navigation.css";
 function NavigationBar() {
   // This increments every time the user logs out
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -47,7 +47,11 @@ function NavigationBar() {
     window.location.href = "/"; // Redirect to home page
     // Force a state update -> triggers re-render -> ValidateToken runs again
   };
-
+  const showRubricTab = [
+    "/judge/research-poster",
+    "/judge/exp-learning",
+    "/judge/three-mt"
+  ].includes(location.pathname);
 
 
   return (
@@ -71,7 +75,9 @@ function NavigationBar() {
                 <Nav.Link href="/judge/research-poster">Research Poster</Nav.Link>
                 <Nav.Link href="/judge/exp-learning">Experiential Learning Poster</Nav.Link>
                 <Nav.Link href="/judge/three-mt">Three Minute Thesis</Nav.Link>
-                <Nav.Link onClick={handleShowRubric}>Rubric</Nav.Link>
+                {showRubricTab && (
+                  <Nav.Link onClick={handleShowRubric}>Rubric</Nav.Link>
+                )}
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </Nav>
             ) : (
