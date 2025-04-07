@@ -51,7 +51,10 @@ function NavigationBar() {
     "/judge/research-poster",
     "/judge/exp-learning",
     "/judge/three-mt"
-  ].includes(location.pathname);
+  ].some(path => location.pathname.startsWith(path)) ||
+  location.pathname.includes("/editscore/1/research-poster/") ||
+  location.pathname.includes("/editscore/1/explearning/") ||
+  location.pathname.includes("/editscore/threemt/");
 
 
   return (
@@ -96,9 +99,9 @@ function NavigationBar() {
         show={showRubric}
         handleClose={handleCloseRubric}
         rubricType={
-          location.pathname.includes("three-mt")
+          location.pathname.includes("three-mt") || location.pathname.includes("threemt")
             ? "3mt"
-            : location.pathname.includes("exp-learning")
+            : location.pathname.includes("exp-learning") || location.pathname.includes("explearning")
             ? "explearning"
             : "poster"
         }
