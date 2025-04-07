@@ -6,7 +6,7 @@ const Home = () => {
   const firstName = localStorage.getItem('first_name');
 
   useEffect(() => {
-    document.title = 'Home';
+    document.title = 'UWM Research Poster Competition & Experiential Learning Expo & Three Minute Thesis - 2025';
   }, []);
 
   return (
