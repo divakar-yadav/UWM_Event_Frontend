@@ -42,7 +42,13 @@ function Confirmation() {
                         {/* Additional spacing */}
                         <br />
                         {/* Animated GIF for visual feedback */}
-                        <img id="image" src={doneGif} alt="done" className="mx-auto" />
+                        {/* <img id="image" src={doneGif} alt="done" className="mx-auto" />*/}
+                        <div className="mx-auto w-[90px]">
+                        <svg className="circle-check" viewBox="0 0 52 52">
+                            <circle className="fill-circle" cx="26" cy="26" r="25" />
+                            <path className="check" d="M16 27l8 8 14-16" />
+                        </svg>
+                        </div>
                         {/* Placeholder for potential status messages */}
                         <p id="status" className="text-sm mt-2"></p>
                     </div>
