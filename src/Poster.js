@@ -78,6 +78,7 @@ function ScoreEntry() {
           <ScoreTableRound1
             round1Score={round1Score}
             status_of_round_1_table={status_of_round_1_table}
+            judge={judge}
           />
         </div>
       </div>
@@ -92,7 +93,7 @@ function Judgeinfo({ judge }) {
         <h1 className="text-4xl font-bold text-center mb-6 animate__animated animate__fadeInDown">
           Research Poster Score Entry
         </h1>
-        <h2 className="mb-4">Welcome {judge}!</h2>
+        <h2 className="text-center mb-4">Welcome {judge}!</h2>
         <br />
         <div>
           <p className="mb-4">
@@ -211,14 +212,16 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId, posterE
   );
 }
 
-function ScoreTableRound1({ round1Score, status_of_round_1_table }) {
+function ScoreTableRound1({ round1Score, status_of_round_1_table,judge }) {
   if (!status_of_round_1_table || round1Score.length === 0) return null;
 
   return (
     <>
       <div className="container-card">
         <h3 className="text-2xl font-bold text-center mb-4 bg-white shadow-md rounded-lg p-4 animate__animated animate__fadeInDown">
-          Posters Scored by {round1Score[0].judge}
+          Posters Scored by :
+          <br />
+        <span className="block text-center"><u>{judge}</u></span>
         </h3>
         <div className="row">
           {round1Score.map((score) => (
