@@ -226,7 +226,7 @@ function ThreeMTEdit() {
                 </div>
               <p><strong>Poster Title:</strong> {posterTitle}</p>
               <p><strong>Student Name:</strong> {studentName}</p>
-              <p><strong>Student Email:</strong> {studentEmail}</p>
+              {/*<p><strong>Student Email:</strong> {studentEmail}</p> */}
             </div>
             <div>
                 <a href="/judge/three-mt">

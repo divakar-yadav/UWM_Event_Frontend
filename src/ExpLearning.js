@@ -98,12 +98,10 @@ function JudgeInfo({ judge }) {
         <br />
         <div>
           <p className="mb-4">
-            Thank you for being a judge today! Please enter scores numerically
-            for one poster at a time. When you enter the poster ID, the
-            student's name and poster title will display. Once you have clicked "Begin Judging," you can
-            enter/edit that poster's scores. You can edit your scores later if
-            necessary. Click "Rubric" on the above menu to view the scoring
-            rubric if needed.
+          <strong>
+    Thank you for being a judge today! Click "Begin Judging" to enter each poster's scores. You can edit your scores later if necessary. Check "Rubric" in
+    the top menu for scoring guidelines.
+  </strong>
           </p>
         </div>
       </div>
