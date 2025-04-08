@@ -87,6 +87,7 @@ function ExpLearning() {
 }
 
 function JudgeInfo({ judge }) {
+  
   return (
     <div className="container mx-auto px-4 py-6 sm:max-w-md md:max-w-lg lg:max-w-xl">
       <div className="bg-white shadow-md rounded-lg p-8 animate__animated animate__fadeIn">
@@ -99,8 +100,7 @@ function JudgeInfo({ judge }) {
           <p className="mb-4">
             Thank you for being a judge today! Please enter scores numerically
             for one poster at a time. When you enter the poster ID, the
-            student's name and poster title will display (if your API includes
-            that info). Once you have clicked "Begin Judging," you can
+            student's name and poster title will display. Once you have clicked "Begin Judging," you can
             enter/edit that poster's scores. You can edit your scores later if
             necessary. Click "Rubric" on the above menu to view the scoring
             rubric if needed.
@@ -160,7 +160,11 @@ function RoundOne({
             </label>
             <input
               type="number"
-              className="w-full p-2 border border-gray-300 rounded"
+              inputMode="numeric"
+              //min = "300"
+              //max = "399"
+              onWheel={(e) => e.target.blur()}
+              className="w-full p-2 border border-gray-300 rounded no-spinner"
               id="posterId"
               aria-describedby="posterId"
               value={round1PosterId}

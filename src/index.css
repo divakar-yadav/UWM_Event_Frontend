@@ -59,3 +59,84 @@ body {
       width: 100% !important;
   }
 }
+.circle-check {
+  width: 90px;
+  height: 90px;
+}
+
+.fill-circle {
+  fill: black;
+  transform-origin: center;
+  transform: scale(0);
+  opacity: 0;
+  animation: growFill 2.5s ease-in-out infinite;
+}
+
+@keyframes growFill {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.check {
+  stroke: #fab702;
+  stroke-width: 4;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  opacity: 0;
+  animation:
+    tickOpacity 2.5s ease-in-out infinite,
+    drawCheck 2.5s ease-in-out infinite;
+}
+
+@keyframes tickOpacity {
+  0%, 39% {
+    opacity: 0;
+  }
+  40%, 100% {
+    opacity: 1;
+  }
+}
+
+@keyframes drawCheck {
+  0%, 40% {
+    stroke-dashoffset: 40;
+  }
+  60% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.tick-text {
+  margin-top: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  text-align: center;
+  opacity: 0;
+  animation: textFade 2.5s ease-in-out infinite;
+}
+
+@keyframes textFade {
+  0%, 39% {
+    opacity: 0;
+  }
+  40%, 100% {
+    opacity: 1;
+  }
+}

@@ -30,7 +30,10 @@ function ExpLearningEdit() {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  
+  const [reflectionError, setReflectionError] = useState("");
+  const [communicationError, setCommunicationError] = useState("");
+  const [presentationError, setPresentationError] = useState("");
   useEffect(() => {
     document.title = "Edit Poster Score";
   }, []);
@@ -116,9 +119,43 @@ function ExpLearningEdit() {
     setShowSuccess(false);
 
     // Convert empty strings to 0, or parse valid numbers
-    const reflectionVal = parseInt(reflectionScore, 10) || 0;
-    const communicationVal = parseInt(communicationScore, 10) || 0;
-    const presentationVal = parseInt(presentationScore, 10) || 0;
+    setReflectionError("");
+    setCommunicationError("");
+    setPresentationError("");
+
+  let hasError = false;
+
+  if (reflectionScore === "") {
+    setReflectionError("Reflection score is required.");
+    hasError = true;
+  } else if (Number(reflectionScore) < 0 || Number(reflectionScore) > 50) {
+    setReflectionError("Must be between 0–50.");
+    hasError = true;
+  }
+
+  if (communicationScore === "") {
+    setCommunicationError("Communication score is required.");
+    hasError = true;
+  } else if (Number(communicationScore) < 0 || Number(communicationScore) > 30) {
+    setCommunicationError("Must be between 0–30.");
+    hasError = true;
+  }
+
+  if (presentationScore === "") {
+    setPresentationError("Presentation score is required.");
+    hasError = true;
+  } else if (Number(presentationScore) < 0 || Number(presentationScore) > 20) {
+    setPresentationError("Must be between 0–20.");
+    hasError = true;
+  }
+
+  if (hasError) {
+    setSubmitLoading(false);
+    return;
+  } 
+    const reflectionVal = Number(reflectionScore) ;
+    const communicationVal = Number(communicationScore);
+    const presentationVal = Number(presentationScore) ;
 
     try {
       const response = await fetch(
@@ -167,17 +204,25 @@ function ExpLearningEdit() {
 
             {/* Additional Poster Info */}
             <div className="mb-3">
-
-              <p><strong>Poster Title:</strong> {posterTitle}</p>
-
-              <p><strong>Student Name:</strong> {studentName}</p>
-              <p><strong>Student Email:</strong> {studentEmail}</p>
-            </div>
             <div className="d-flex justify-content-between align-items-center mb-2">
                   <Badge pill className="round-badge">
                     Poster ID: {posterId}
                   </Badge>
+                  
                 </div>
+              <p><strong>Poster Title:</strong> {posterTitle}</p>
+
+              <p><strong>Student Name:</strong> {studentName}</p>
+              <p><strong>Student Email:</strong> {studentEmail}</p>
+              
+            </div>
+            
+                <div>
+                <a href="/judge/exp-learning">
+            <button className="mt-4 bg-black hover:bg-yellow-600 text-yellow-400 font-bold py-2 px-4 rounded border border-yellow-400">
+            &lt;&lt; Go back
+              </button>
+            </a> </div>
             <div style={{ height: "40px" }} className="mt-2">
               {showSuccess && (
                 <div className="p-2 rounded bg-green-100 border border-green-300 text-green-800 text-sm transition-opacity duration-300">
@@ -191,16 +236,19 @@ function ExpLearningEdit() {
                 label="Reflection Score (0-50)"
                 value={reflectionScore}
                 onChange={setReflectionScore}
+                error={reflectionError}
               />
               <FormInput
                 label="Communication Score (0-30)"
                 value={communicationScore}
                 onChange={setCommunicationScore}
+                error={communicationError}
               />
               <FormInput
                 label="Presentation Score (0-20)"
                 value={presentationScore}
                 onChange={setPresentationScore}
+                error={presentationError}
               />
 
               <div className="mb-4">
@@ -233,7 +281,7 @@ function ExpLearningEdit() {
 }
 
 // Reusable text input field
-function FormInput({ label, value, onChange }) {
+function FormInput({ label, value, onChange, error }) {
   const handleChange = (e) => {
     onChange(e.target.value); // store raw string
   };
@@ -242,11 +290,14 @@ function FormInput({ label, value, onChange }) {
     <div className="mb-4">
       <label className="block text-gray-700 font-bold mb-2">{label}</label>
       <input
-        type="text"
+        type="number"
+        step ="any"
+        inputMode="decimal"
+        pattern="[0-9]*"
         className="w-full border rounded px-3 py-2"
         value={value}
         onChange={handleChange}
-      />
+      />{error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>
   );
 }

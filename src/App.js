@@ -26,7 +26,7 @@ import "./index.css";
 // PrivateRoute component for protected routes
 import PrivateRoute from "./PrivateRoute";
 import ThreeMT from "./ThreeMT";
-
+import ServerErrorPage from "./500";
 // Main App component which holds the structure of the entire application
 function App() {
   // Helper function to concatenate the API URL with a path
@@ -63,6 +63,7 @@ function App() {
             <Route path="/editscore/1/research-poster/:posterId" element={<PrivateRoute scoring_type={'research-poster'} permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><EditRound round={1} /></PrivateRoute>} />
             <Route path="/editscore/threemt/:posterId" element={<PrivateRoute  scoring_type={'threemt'} permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><ThreeMtEdit round={1} /></PrivateRoute>} />
             <Route path="/editscore/1/explearning/:posterId" element={<PrivateRoute scoring_type={'explearning'}  permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><ExpLearningEdit round={1} /></PrivateRoute>} />
+           
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>

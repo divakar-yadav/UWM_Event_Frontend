@@ -121,7 +121,7 @@ function JudgeInfo({ judge }) {
     <div className="container mx-auto px-4 py-6 sm:max-w-md md:max-w-lg lg:max-w-xl">
       <div className="bg-white shadow-md rounded-lg p-8 animate__animated animate__fadeIn">
         <h1 className="text-4xl font-bold text-center mb-6 animate__animated animate__fadeInDown">
-          Three Minutes Thesis Score Entry
+          Three Minute Thesis Score Entry
         </h1>
         <h2 className="mb-4">Welcome {judge}!</h2>
         <p className="mb-4">
@@ -144,9 +144,13 @@ function PosterInputForm({ posterId, setPosterId, handleSubmit }) {
           </label>
           <input
             type="number"
-            className="w-full p-2 border border-gray-300 rounded"
+            inputMode="numeric"
+            //min = "400"
+            //max = "499"
+            className="w-full p-2 border border-gray-300 rounded no-spinner"
             id="posterId"
             value={posterId}
+            onWheel={(e) => e.target.blur()}
             onChange={(e) => setPosterId(e.target.value)}
           />
           <div className="text-sm text-gray-500">Enter Poster ID</div>

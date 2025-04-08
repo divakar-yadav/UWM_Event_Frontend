@@ -15,10 +15,12 @@ function EditRound({ round }) {
   const [studentEmail, setStudentEmail] = useState("");
   const [studentDepartment, setStudentDepartment] = useState("");
   const [loading, setLoading] = useState(true);
-  const [researchScore, setResearchScore] = useState(0);
-  const [communicationScore, setCommunicationScore] = useState(0);
-  const [presentationScore, setPresentationScore] = useState(0);
+  const [researchScore, setResearchScore] = useState("");
+  const [communicationScore, setCommunicationScore] = useState("");
+  const [presentationScore, setPresentationScore] = useState("");
   const [feedback, setFeedback] = useState("");
+  
+  
 
   useEffect(() => {
     document.title = `Edit Poster Score`;
@@ -45,9 +47,9 @@ function EditRound({ round }) {
           setStudentName(data.student_name);
           setStudentEmail(data.student_email);
           setStudentDepartment(data.student_department);
-          setResearchScore(data.research_score);
-          setCommunicationScore(data.communication_score);
-          setPresentationScore(data.presentation_score);
+          setResearchScore( data.research_score === 0 && !data.feedback ? "" : data.research_score);
+          setCommunicationScore(data.communication_score === 0 && !data.feedback ? "" : data.communication_score);
+          setPresentationScore(data.presentation_score === 0 && !data.feedback ? "" : data.presentation_score);
           setFeedback(data.feedback);
         }
       } catch (error) {
@@ -144,12 +146,51 @@ function Scoringfields({
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [researchError, setResearchError] = useState("");
+  const [communicationError, setCommunicationError] = useState("");
+  const [presentationError, setPresentationError] = useState("");
   const navigate = useNavigate();
 
   const handleFormsubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
     setError("");
+    let hasError = false;
+    setResearchError("");
+    setCommunicationError("");
+    setPresentationError("");
+
+      if (researchScore === "") {
+        setResearchError("Research score is required.");
+        hasError = true;
+      }
+      if (communicationScore === "") {
+        setCommunicationError("Communication score is required.");
+        hasError = true;
+      }
+      if (presentationScore === "") {
+        setPresentationError("Presentation score is required.");
+        hasError = true;
+      }
+
+      // range check
+      if (Number(researchScore) < 0 || Number(researchScore) > 50) {
+        setResearchError("Must be between 0–50.");
+        hasError = true;
+      }
+      if (Number(communicationScore) < 0 || Number(communicationScore) > 30) {
+        setCommunicationError("Must be between 0–30.");
+        hasError = true;
+      }
+      if (Number(presentationScore) < 0 || Number(presentationScore) > 20) {
+        setPresentationError("Must be between 0–20.");
+        hasError = true;
+      }
+
+      if (hasError) {
+        setLoading(false);
+        return;
+      }
 
     const response = await fetch(
       `${process.env.REACT_APP_API_URL}/insertgrade/round${round}_edit/`,
@@ -161,9 +202,9 @@ function Scoringfields({
         },
         body: JSON.stringify({
           poster_id: posterIdRound,
-          research_score: researchScore,
-          communication_score: communicationScore,
-          presentation_score: presentationScore,
+          research_score: Number(researchScore),
+          communication_score: Number(communicationScore),
+          presentation_score: Number(presentationScore),
           feedback: feedback,
         }),
       }
@@ -195,7 +236,7 @@ function Scoringfields({
               id="researchScore"
               value={researchScore}
               onChange={(e) => setResearchScore(e.target.value)}
-            />
+            />{researchError && <p className="text-red-500 text-sm">{researchError}</p>}
           </div>
           <div className="mb-4">
             <label htmlFor="communicationScore" className="block text-gray-700 font-bold mb-2">
@@ -207,7 +248,7 @@ function Scoringfields({
               id="communicationScore"
               value={communicationScore}
               onChange={(e) => setCommunicationScore(e.target.value)}
-            />
+            /> {communicationError && <p className="text-red-500 text-sm">{communicationError}</p>}
           </div>
           <div className="mb-4">
             <label htmlFor="presentationScore" className="block text-gray-700 font-bold mb-2">
@@ -219,7 +260,7 @@ function Scoringfields({
               id="presentationScore"
               value={presentationScore}
               onChange={(e) => setPresentationScore(e.target.value)}
-            />
+            />{presentationError && <p className="text-red-500 text-sm">{presentationError}</p>}
           </div>
           <div className="mb-4">
             <label htmlFor="feedback" className="block text-gray-700 font-bold mb-2">

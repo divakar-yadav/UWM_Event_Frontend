@@ -6,7 +6,7 @@ const Home = () => {
   const firstName = localStorage.getItem('first_name');
 
   useEffect(() => {
-    document.title = 'Home';
+    document.title = 'UWM Research Poster Competition & Experiential Learning Expo & Three Minute Thesis - 2025';
   }, []);
 
   return (
@@ -35,6 +35,12 @@ const Home = () => {
   <strong>IDs starting with 100:</strong> Undergraduate Research Poster<br />
   <strong>IDs starting with 200:</strong> Graduate Research Poster
 </p>
+<button
+          className="w-full bg-black text-white py-3 px-6 rounded-lg shadow-md mb-4 hover:bg-gray-800 transition duration-300"
+          onClick={() => navigate('/judge/research-poster')}
+        >
+          Begin Judging for the Research Poster
+        </button>
         </div>
         
         <div className="bg-white shadow-md rounded-lg p-6 text-center relative">
@@ -49,6 +55,12 @@ const Home = () => {
   <strong>Note for Judges:</strong><br />
   <strong>IDs starting with 300:</strong> Experiential Learning
 </p>
+<button
+          className="w-full bg-black text-white py-3 px-6 rounded-lg shadow-md mb-4 hover:bg-gray-800 transition duration-300"
+          onClick={() => navigate('/judge/exp-learning')}
+        >
+          Begin Judging for the Exp Learning
+        </button>
         </div>
         
         <div className="bg-white shadow-md rounded-lg p-6 text-center relative">
@@ -63,33 +75,19 @@ const Home = () => {
           <p className="text-sm mt-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-2 rounded">
   <strong>Note for Judges:</strong><br />
   <strong>IDs starting with 400:</strong> Three Minute Thesis (3MT)
-</p>
-        </div>
-      </div>
-
-      <h1 className="text-3xl font-bold mb-8">Judging Portal</h1>
-
-      <div className="w-full max-w-md flex flex-col items-center">
-        <button
-          className="w-full bg-black text-white py-3 px-6 rounded-lg shadow-md mb-4 hover:bg-gray-800 transition duration-300"
-          onClick={() => navigate('/judge/research-poster')}
-        >
-          Begin Judging for the Research Poster
-        </button>
-
-        <button
-          className="w-full bg-black text-white py-3 px-6 rounded-lg shadow-md mb-4 hover:bg-gray-800 transition duration-300"
-          onClick={() => navigate('/judge/exp-learning')}
-        >
-          Begin Judging for the Exp Learning
-        </button>
-
-        <button
+</p> <button
           className="w-full bg-black text-white py-3 px-6 rounded-lg shadow-md mb-4 hover:bg-gray-800 transition duration-300"
           onClick={() => navigate('/judge/three-mt')}
         >
           Begin Judging for the 3 Minute Thesis
         </button>
+        </div>
+      </div>
+
+      
+
+      <div className="w-full max-w-md flex flex-col items-center">
+       
       </div>
     </div>
   );
