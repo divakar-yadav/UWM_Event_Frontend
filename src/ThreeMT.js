@@ -125,9 +125,10 @@ function JudgeInfo({ judge }) {
         </h1>
         <h2 className="mb-4">Welcome {judge}!</h2>
         <p className="mb-4">
-          Thank you for being a judge today! Please enter scores for one poster
-          at a time. After submission, your scores appear below. You can edit
-          them as needed. Click "Rubric" in the top menu for more info.
+        <strong>
+    Thank you for being a judge today! Click "Begin Judging" to enter each thesis's scores. You can edit your scores later if necessary. Check "Rubric" in
+    the top menu for scoring guidelines.
+  </strong>
         </p>
       </div>
     </div>
