@@ -204,17 +204,25 @@ function ExpLearningEdit() {
 
             {/* Additional Poster Info */}
             <div className="mb-3">
-
-              <p><strong>Poster Title:</strong> {posterTitle}</p>
-
-              <p><strong>Student Name:</strong> {studentName}</p>
-              <p><strong>Student Email:</strong> {studentEmail}</p>
-            </div>
             <div className="d-flex justify-content-between align-items-center mb-2">
                   <Badge pill className="round-badge">
                     Poster ID: {posterId}
                   </Badge>
+                  
                 </div>
+              <p><strong>Poster Title:</strong> {posterTitle}</p>
+
+              <p><strong>Student Name:</strong> {studentName}</p>
+              <p><strong>Student Email:</strong> {studentEmail}</p>
+              
+            </div>
+            
+                <div>
+                <a href="/judge/exp-learning">
+            <button className="mt-4 bg-black hover:bg-yellow-600 text-yellow-400 font-bold py-2 px-4 rounded border border-yellow-400">
+            &lt;&lt; Go back
+              </button>
+            </a> </div>
             <div style={{ height: "40px" }} className="mt-2">
               {showSuccess && (
                 <div className="p-2 rounded bg-green-100 border border-green-300 text-green-800 text-sm transition-opacity duration-300">

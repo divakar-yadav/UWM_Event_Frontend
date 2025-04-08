@@ -219,15 +219,21 @@ function ThreeMTEdit() {
 
             {/* Show additional info about the poster */}
             <div className="mb-4">
-              <p><strong>Poster Title:</strong> {posterTitle}</p>
-              <p><strong>Student Name:</strong> {studentName}</p>
-              <p><strong>Student Email:</strong> {studentEmail}</p>
-            </div>
             <div className="d-flex justify-content-between align-items-center mb-2">
                   <Badge pill className="round-badge">
                     Poster ID: {posterId}
                   </Badge>
                 </div>
+              <p><strong>Poster Title:</strong> {posterTitle}</p>
+              <p><strong>Student Name:</strong> {studentName}</p>
+              <p><strong>Student Email:</strong> {studentEmail}</p>
+            </div>
+            <div>
+                <a href="/judge/three-mt">
+            <button className="mt-4 bg-black hover:bg-yellow-600 text-yellow-400 font-bold py-2 px-4 rounded border border-yellow-400">
+            &lt;&lt; Go back
+              </button>
+            </a> </div>
             {/* Success message */}
             <div style={{ height: "40px" }} className="mt-1">
               {showSuccess && (
