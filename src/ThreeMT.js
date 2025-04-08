@@ -70,7 +70,7 @@ function ThreeMT() {
 
       if (response.status !== 200) {
         const data = await response.json();
-        setPosterError(data.status || "Invalid Poster ID");
+        setPosterError(data.status || "Invalid Thesis ID");
         
         setLoading(false);
       } else {
@@ -123,7 +123,8 @@ function JudgeInfo({ judge }) {
         <h1 className="text-4xl font-bold text-center mb-6 animate__animated animate__fadeInDown">
           Three Minute Thesis Score Entry
         </h1>
-        <h2 className="mb-4">Welcome {judge}!</h2>
+        
+        <h2 className="text-center mb-4">Welcome {judge}!</h2>
         <p className="mb-4">
         <strong>
     Thank you for being a judge today! Click "Begin Judging" to enter each thesis's scores. You can edit your scores later if necessary. Check "Rubric" in
@@ -141,7 +142,7 @@ function PosterInputForm({ posterId, setPosterId, handleSubmit , posterError}) {
       <form onSubmit={handleSubmit} className="roundone-form">
         <div className="mb-3">
           <label htmlFor="posterId" className="block font-bold mb-1">
-            Poster ID Number
+            Three Minute Thesis ID Number
           </label>
           <input
             type="number"
@@ -154,7 +155,7 @@ function PosterInputForm({ posterId, setPosterId, handleSubmit , posterError}) {
             onWheel={(e) => e.target.blur()}
             onChange={(e) => setPosterId(e.target.value)}
           />
-          <div className="text-sm text-gray-500">Enter Poster ID</div>
+          <div className="text-sm text-gray-500">Enter Three Minute Thesis ID</div>
         </div>
         <button
           type="submit"
@@ -177,7 +178,8 @@ function ScoreTable({ scores, status, judge }) {
   return (
     <div className="container-card">
       <h3 className="text-2xl font-bold text-center mb-4 bg-white shadow-md rounded-lg p-4 animate__animated animate__fadeInDown">
-        Posters Scored by <u>{judge}</u>
+      Three Minute Thesis Scored by: <br />
+      <span className="block text-center"><u>{judge}</u></span>
       </h3>
       <div className="row">
         {scores.map((score, index) => (
