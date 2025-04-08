@@ -22,6 +22,7 @@ function ExpLearning() {
   const [loading, setLoading] = useState(true);
   const [round1PosterId, setRound1PosterId] = useState("");
   const [status_of_round_1_table, set_status_of_round_1_table] = useState(true);
+  const [posterError, setPosterError] = useState(""); // for error message
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,6 +74,8 @@ function ExpLearning() {
             round1PosterId={round1PosterId}
             setRound1PosterId={setRound1PosterId}
             setRound1Score={setRound1Score}
+            posterError={posterError}
+            setPosterError={setPosterError}
           />
           <ScoreTableRound1
             round1Score={round1Score}
@@ -114,6 +117,8 @@ function RoundOne({
   round1PosterId,
   setRound1PosterId,
   setRound1Score,
+  posterError,
+  setPosterError,
 }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -139,10 +144,11 @@ function RoundOne({
     setRound1Score(data.Exp_learning_posters);
 
     if (response.status !== 200) {
-      alert(data.status);
+      setPosterError(data.status || "Invalid Poster ID");
       setLoading(false);
     } else {
       // If everything is ok, go to edit page
+      setPosterError("");
       navigate("/editscore/1/explearning/" + round1PosterId);
       setLoading(false);
     }
@@ -197,7 +203,10 @@ function RoundOne({
               "Begin Judging"
             )}
           </button>
-          <p id="poster-1-error" className="text-red-500 text-sm mt-2"></p>
+          {posterError && (
+            <p id="poster-1-error" className="text-red-500 text-sm mt-2">
+            {posterError}
+            </p>)}
         </form>
       </div>
       <br />
