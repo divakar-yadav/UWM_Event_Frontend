@@ -23,6 +23,7 @@ function ThreeMT() {
   const [posterId, setPosterId] = useState("");
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState(false);
+  const [posterError, setPosterError] = useState(""); // for error message
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,7 +55,7 @@ function ThreeMT() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    setPosterError("");
     try {
       const response = await fetch(
         `${process.env.REACT_APP_API_URL}/three-mt?poster_id=${posterId}`,
@@ -69,20 +70,18 @@ function ThreeMT() {
 
       if (response.status !== 200) {
         const data = await response.json();
-        if (data.status) {
-          alert(data.status);
-        } else {
-          alert("Something went wrong. Please refresh the page.");
-        }
+        setPosterError(data.status || "Invalid Poster ID");
+        
         setLoading(false);
       } else {
         setLoading(false);
+        setPosterError("");
         navigate("/editscore/threemt/" + posterId);
       }
     } catch (error) {
       console.error("Error checking poster:", error);
       setLoading(false);
-      alert("An error occurred. Please try again.");
+      setPosterError("An error occurred. Please try again.");
     }
   };
 
@@ -108,6 +107,7 @@ function ThreeMT() {
             posterId={posterId}
             setPosterId={setPosterId}
             handleSubmit={handleSubmit}
+            posterError={posterError}
           />
           <ScoreTable scores={scores} status={status} judge={judge} />
         </div>
@@ -135,7 +135,7 @@ function JudgeInfo({ judge }) {
   );
 }
 
-function PosterInputForm({ posterId, setPosterId, handleSubmit }) {
+function PosterInputForm({ posterId, setPosterId, handleSubmit , posterError}) {
   return (
     <div className="text-2xl font-bold text-center mb-4 bg-white shadow-md rounded-lg p-4">
       <form onSubmit={handleSubmit} className="roundone-form">
@@ -162,7 +162,10 @@ function PosterInputForm({ posterId, setPosterId, handleSubmit }) {
         >
           Begin Judging
         </button>
-        <p id="poster-1-error" className="text-red-500 text-sm mt-2"></p>
+        {posterError && (
+          <p id="poster-1-error" className="text-red-500 text-sm mt-2">
+            {posterError}
+            </p>)}    
       </form>
     </div>
   );

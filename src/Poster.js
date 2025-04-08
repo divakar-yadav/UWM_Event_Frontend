@@ -22,7 +22,7 @@ function ScoreEntry() {
   const [loading, setLoading] = useState(true);
   const [round1PosterId, setRound1PosterId] = useState("");
   const [status_of_round_1_table, set_status_of_round_1_table] = useState(true);
-
+  const [posterError, setPosterError] = useState(""); // for error message
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -72,6 +72,8 @@ function ScoreEntry() {
             finalistPosterId={finalistPosterId}
             round1PosterId={round1PosterId}
             setRound1PosterId={setRound1PosterId}
+            posterError={posterError}
+            setPosterError={setPosterError}
           />
           <ScoreTableRound1
             round1Score={round1Score}
@@ -105,12 +107,18 @@ function Judgeinfo({ judge }) {
   );
 }
 
-function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId }) {
+function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId, posterError, setPosterError }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const id = parseInt(round1PosterId);
+  if (isNaN(id) || id < 100 || id > 299) {
+    setPosterError("Only Poster IDs between 100 and 299 are allowed.");
+    return;
+  }
+  setPosterError("");
     setLoading(true);
 
     const response = await fetch(
@@ -126,6 +134,7 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId }) {
     // handle response
     if (response.status !== 200) {
       const data = await response.json();
+      setPosterError(data.status || "Invalid Poster ID.");
       if (data.status) {
         document.getElementById("poster-1-error").innerHTML = data.status;
         document.getElementById("poster-1-error").style.color = "red";
@@ -191,7 +200,9 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId }) {
                 "Begin Judging"
               )}
             </button>
-            <p id="poster-1-error" className="text-red-500 text-sm mt-2"></p>
+            {posterError && (
+            <p id="poster-1-error" className="text-red-500 text-sm mt-2">
+          {posterError}</p>)}
           </form>
         </div>
       )}
