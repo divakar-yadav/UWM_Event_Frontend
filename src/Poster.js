@@ -135,14 +135,14 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId, posterE
     if (response.status !== 200) {
       const data = await response.json();
       setPosterError(data.status || "Invalid Poster ID.");
-      if (data.status) {
+     {/*} if (data.status) {
         document.getElementById("poster-1-error").innerHTML = data.status;
         document.getElementById("poster-1-error").style.color = "red";
       } else {
         document.getElementById("poster-1-error").innerHTML =
           'Something went wrong, Please refresh the page; <button onClick={window.location.reload()}>Refresh</button>';
         document.getElementById("poster-1-error").style.color = "red";
-      }
+      }*/}
       setLoading(false);
     } else {
       navigate("/editscore/1/research-poster/" + round1PosterId);
