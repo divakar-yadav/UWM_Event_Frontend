@@ -214,7 +214,7 @@ function ThreeMTEdit() {
         <div className="container mx-auto px-4 py-6">
           <div className="bg-white rounded-lg p-6 shadow-md max-w-2xl mx-auto">
             <h1 className="text-xl font-bold mb-3">
-              ThreeMT Poster Score
+              Three Minute Thesis Poster Score
             </h1>
 
             {/* Show additional info about the poster */}

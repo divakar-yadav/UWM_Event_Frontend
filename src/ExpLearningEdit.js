@@ -200,7 +200,7 @@ function ExpLearningEdit() {
       <div className="bg-gradient-to-r from-ffbd00 to-[#eca600] min-h-screen">
         <div className="container mx-auto px-4 py-6">
           <div className="bg-white rounded-lg p-6">
-            <h1 className="text-xl font-bold mb-4">Exp Learning Poster Score</h1>
+            <h1 className="text-xl font-bold mb-4">Experiential Learning Poster Score</h1>
 
             {/* Additional Poster Info */}
             <div className="mb-3">
