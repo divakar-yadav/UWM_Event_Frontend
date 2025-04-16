@@ -127,7 +127,7 @@ function JudgeInfo({ judge }) {
         <h2 className="text-center mb-4">Welcome {judge}!</h2>
         <p className="mb-4">
         <strong>
-    Thank you for being a judge today! Click "Begin Judging" to enter each thesis's scores. You can edit your scores later if necessary. Check "Rubric" in
+    Thank you for being a judge today! Click "Begin Judging" to enter each Three Minute Thesis score. You can edit your scores later if necessary. Check "Rubric" in
     the top menu for scoring guidelines.
   </strong>
         </p>
