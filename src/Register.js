@@ -24,6 +24,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [showFields, setShowFields] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [registrationClosed, setRegistrationClosed] = useState(false);
 
   useEffect(() => {
     if (last_name) {
@@ -59,6 +60,13 @@ function Register() {
       if (response.status === 201) {
         window.location.href = "/confirmation";
         setLoading(false);
+      }
+      if (response.status === 403) {
+        setRegistrationClosed(true);
+        const p = document.getElementById("error");
+        p.innerHTML = '<div style="color:red; text-align:center; font-weight:bold;">Registration is closed.</div>';
+        setLoading(false);
+        return;
       }
       else {
         const data = await response.json();

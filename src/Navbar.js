@@ -14,6 +14,7 @@ function NavigationBar() {
   const handleCloseRubric = () => setShowRubric(false);
   const handleShowRubric = () => setShowRubric(true);
   const location = useLocation();
+
   // On every render, we run ValidateToken() again
   React.useEffect(() => {
 
