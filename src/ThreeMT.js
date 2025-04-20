@@ -191,13 +191,13 @@ function ScoreTable({ scores, status, judge }) {
                   <strong>{score.student_name || "Unknown Student"}</strong>
                 </Card.Title>
                 <div className="mb-2">
-                  <strong>Poster Title:</strong>{" "}
+                  <strong>Three Minute Thesis Title:</strong>{" "}
                   {score.poster_title || "No Title"}
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center mb-2">
                   <Badge pill className="round-badge">
-                    Poster ID: {score.poster_id}
+                  Three Minute Thesis ID: {score.poster_id}
                   </Badge>
                 </div>
                 <div className="d-flex justify-content-between mb-2">
