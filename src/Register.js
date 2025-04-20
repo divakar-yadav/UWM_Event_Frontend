@@ -64,7 +64,7 @@ function Register() {
       if (response.status === 403) {
         setRegistrationClosed(true);
         const p = document.getElementById("error");
-        p.innerHTML = '<div style="color:red; text-align:center; font-weight:bold;">Registration is closed.</div>';
+        p.innerHTML = '<div style="color:red; text-align:center; font-weight:bold;">Registration is closed, Please reach out to scoring platform team</div>';
         setLoading(false);
         return;
       }
@@ -111,7 +111,7 @@ function Register() {
   //some changes
   return (
     <>
-      <CountdownTimer targetDate={new Date('2023-04-22T09:00:00-05:00')} />
+      <CountdownTimer targetDate={new Date('2025-04-26T08:00:00-05:00')} />
       <div className="min-h-screen bg-gradient-to-r from-ffbd00 to-[#eca600] flex items-center justify-center pt-12 pb-8">
         <div className="bg-white shadow-md rounded-lg p-8  w-full md:w-96 lg:w-1/2 mx-4 md:mx-0">
           <br />
