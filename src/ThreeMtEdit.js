@@ -38,7 +38,7 @@ function ThreeMTEdit() {
   useEffect(() => {
     document.title = "Edit ThreeMT Score";
   }, []);
-
+  
   useEffect(() => {
     let ignore = false;
     async function fetchData() {
@@ -212,19 +212,19 @@ function ThreeMTEdit() {
       <CountdownTimer targetDate={new Date("2023-04-22T09:00:00-05:00")} />
       <div className="bg-gradient-to-r from-ffbd00 to-[#eca600] min-h-screen">
         <div className="container mx-auto px-4 py-6">
-          <div className="bg-white rounded-lg p-6 shadow-md max-w-2xl mx-auto">
-            <h1 className="text-xl font-bold mb-3">
-              Three Minute Thesis Poster Score
+          <div className="bg-white rounded-lg p-6">
+            <h1 className="text-xl font-bold mb-4">
+              Three Minute Thesis Score
             </h1>
 
             {/* Show additional info about the poster */}
             <div className="mb-4">
             <div className="d-flex justify-content-between align-items-center mb-2">
                   <Badge pill className="round-badge">
-                    Poster ID: {posterId}
+                    Three Minute Thesis ID: {posterId}
                   </Badge>
                 </div>
-              <p><strong>Poster Title:</strong> {posterTitle}</p>
+              <p><strong>3MT Title:</strong> {posterTitle}</p>
               <p><strong>Student Name:</strong> {studentName}</p>
               {/*<p><strong>Student Email:</strong> {studentEmail}</p> */}
             </div>
@@ -235,7 +235,7 @@ function ThreeMTEdit() {
               </button>
             </a> </div>
             {/* Success message */}
-            <div style={{ height: "40px" }} className="mt-1">
+            <div style={{ height: "40px" }} className="mt-2">
               {showSuccess && (
                 <div className="p-2 rounded bg-green-100 border border-green-300 text-green-800 text-sm transition-opacity duration-300">
                   ✅ Scores updated successfully!
@@ -303,15 +303,18 @@ function FormInput({ label, value, onChange, error }) {
   const handleChange = (e) => {
     onChange(e.target.value); // store raw string
   };
-
+  const handleWheel = (e) => {
+    e.target.blur(); 
+  };
   return (
-    <div className="mb-3">
+    <div className="mb-4">
       <label className="block text-gray-700 font-bold mb-1">{label}</label>
       <input
         type="number"
         step="any"
         inputMode="decimal"
         pattern="[0-9]*"
+        onWheel={handleWheel}
         className="w-full border rounded px-3 py-2"
         value={value}
         onChange={handleChange}

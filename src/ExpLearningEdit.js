@@ -285,7 +285,9 @@ function FormInput({ label, value, onChange, error }) {
   const handleChange = (e) => {
     onChange(e.target.value); // store raw string
   };
-
+  const handleWheel = (e) => {
+    e.target.blur(); 
+  };
   return (
     <div className="mb-4">
       <label className="block text-gray-700 font-bold mb-2">{label}</label>
@@ -294,6 +296,7 @@ function FormInput({ label, value, onChange, error }) {
         step ="any"
         inputMode="decimal"
         pattern="[0-9]*"
+        onWheel={handleWheel}
         className="w-full border rounded px-3 py-2"
         value={value}
         onChange={handleChange}

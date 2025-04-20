@@ -236,6 +236,7 @@ function Scoringfields({
               id="researchScore"
               value={researchScore}
               onChange={(e) => setResearchScore(e.target.value)}
+              onWheel={(e) => e.target.blur()}
             />{researchError && <p className="text-red-500 text-sm">{researchError}</p>}
           </div>
           <div className="mb-4">
@@ -248,6 +249,7 @@ function Scoringfields({
               id="communicationScore"
               value={communicationScore}
               onChange={(e) => setCommunicationScore(e.target.value)}
+              onWheel={(e) => e.target.blur()}
             /> {communicationError && <p className="text-red-500 text-sm">{communicationError}</p>}
           </div>
           <div className="mb-4">
@@ -260,6 +262,7 @@ function Scoringfields({
               id="presentationScore"
               value={presentationScore}
               onChange={(e) => setPresentationScore(e.target.value)}
+              onWheel={(e) => e.target.blur()}
             />{presentationError && <p className="text-red-500 text-sm">{presentationError}</p>}
           </div>
           <div className="mb-4">
