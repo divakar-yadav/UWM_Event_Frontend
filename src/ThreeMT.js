@@ -201,16 +201,17 @@ function ScoreTable({ scores, status, judge }) {
                   </Badge>
                 </div>
                 <div className="d-flex justify-content-between mb-2">
-                  <div><strong>Communication (0-10)</strong></div>
-                  <div>{score.communication}</div>
+                  <div><strong>Comprehension Content (0-10)</strong></div>
+                  <div>{score.comprehension_content}</div>
                 </div>
+               
                 <div className="d-flex justify-content-between mb-2">
                   <div><strong>Engagement (0-10)</strong></div>
                   <div>{score.engagement}</div>
                 </div>
                 <div className="d-flex justify-content-between mb-2">
-                  <div><strong>Comprehension Content (0-10)</strong></div>
-                  <div>{score.comprehension_content}</div>
+                  <div><strong>Communication (0-10)</strong></div>
+                  <div>{score.communication}</div>
                 </div>
                 <div className="d-flex justify-content-between mb-2">
                   <div><strong>Overall Impression (0-10)</strong></div>
