@@ -22,7 +22,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 // Navigation bar component
 import Navbar from "./Navbar";
 import "./index.css";
-
+import AdminDashboardPanel from "./AdminDashboardPanel"; // Admin dashboard component
 // PrivateRoute component for protected routes
 import PrivateRoute from "./PrivateRoute";
 import ThreeMT from "./ThreeMT";
@@ -63,7 +63,7 @@ function App() {
             <Route path="/editscore/1/research-poster/:posterId" element={<PrivateRoute scoring_type={'research-poster'} permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><EditRound round={1} /></PrivateRoute>} />
             <Route path="/editscore/threemt/:posterId" element={<PrivateRoute  scoring_type={'threemt'} permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><ThreeMtEdit round={1} /></PrivateRoute>} />
             <Route path="/editscore/1/explearning/:posterId" element={<PrivateRoute scoring_type={'explearning'}  permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><ExpLearningEdit round={1} /></PrivateRoute>} />
-           
+            <Route path="/pa-283771828"element={<PrivateRoute><AdminDashboardPanel /></PrivateRoute>}/>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
