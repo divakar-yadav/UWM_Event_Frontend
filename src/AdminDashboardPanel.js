@@ -17,6 +17,11 @@ export default function AdminDashboardPanel() {
   const LOCAL_BASE_URL = "http://localhost:8000";
 const [aggStatus, setAggStatus] = useState({ loading: false, error: "", lastRun: "" });
 
+
+useEffect(() => {
+  setAggregateDataUG([]);
+  setAggregateDataGrad([]);
+}, [category]);
 useEffect(() => {
   if (!isSuperUser || !token) return;
   fetchAggregateData();
