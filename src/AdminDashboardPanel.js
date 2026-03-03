@@ -201,7 +201,7 @@ const applyFilterSort = (rows, columns) => {
         setAggregateDataUG(top3);
         setAggregateDataGrad([]);
       }
-      setAggStatus({ loading: false, error: "", lastRun: new Date().toLocaleTimeString() });
+      setAggStatus({ loading: false, error: "", lastRun: new Date().toLocaleString() });
     })
     .catch(() => {
       setAggregateDataUG([]);
@@ -389,25 +389,6 @@ const sortArrow = (k) =>
             </tr>
 
 
-            {/* <tr className="bg-gray-200">
-              {view === "scores" && (<>
-                <th className="border px-4 py-2">Student Name</th>
-                <th className="border px-4 py-2">Poster ID</th>
-                <th className="border px-4 py-2">Average Score</th>
-                <th className="border px-4 py-2">Judge Count</th>
-              </>)}
-              {view === "judge" && (<>
-                <th className="border px-4 py-2">Judge First Name</th>
-                <th className="border px-4 py-2">Judge Email</th>
-                <th className="border px-4 py-2">Posters Scored</th>
-                <th className="border px-4 py-2">Total Posters</th>
-              </>)}
-              {view === "student" && (<>
-                <th className="border px-4 py-2">Student Name</th>
-                <th className="border px-4 py-2">Poster ID</th>
-                <th className="border px-4 py-2">Scored By</th>
-              </>)}
-            </tr> */}
             
           </thead>
           <tbody>
@@ -447,33 +428,7 @@ const sortArrow = (k) =>
               <td className="border px-4 py-2" colSpan={columns.length}>No data available for this view.</td>
             </tr>
           )}
-            {/* {data.length > 0 ? (
-              data.map((item, idx) => (
-                <tr key={idx}>
-                  {view === "scores" && (<>
-                    <td className="border px-4 py-2">{item.student__Name || item.Student__Name}</td>
-                    <td className="border px-4 py-2">{item.student__poster_ID || item.Student__poster_ID}</td>
-                    <td className="border px-4 py-2">{item.avg_score}</td>
-                    <td className="border px-4 py-2">{item.judge_count}</td>
-                  </>)}
-                  {view === "judge" && (<>
-                    <td className="border px-4 py-2">{item.judge_first_name}</td>
-                    <td className="border px-4 py-2">{item.judge_email}</td>
-                    <td className="border px-4 py-2">{item.posters_scored?.join(", ")}</td>
-                    <td className="border px-4 py-2">{item.total_scored}</td>
-                  </>)}
-                  {view === "student" && (<>
-                    <td className="border px-4 py-2">{item.student}</td>
-                    <td className="border px-4 py-2">{item.poster_id}</td>
-                    <td className="border px-4 py-2">{item.scored}/{item.total}</td>
-                  </>)}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td className="border px-4 py-2" colSpan="4">No data available for this view.</td>
-              </tr>
-            )} */}
+          
           </tbody>
         </table>
       </div>
