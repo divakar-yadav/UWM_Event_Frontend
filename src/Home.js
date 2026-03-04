@@ -6,7 +6,7 @@ const Home = () => {
   const firstName = localStorage.getItem('first_name');
 
   useEffect(() => {
-    document.title = 'UWM Research Poster Competition & Experiential Learning Expo & Three Minute Thesis - 2025';
+    document.title = 'UWM Research Poster Competition & Experiential Learning Expo & Three Minute Thesis - 2026';
   }, []);
 
   return (
@@ -18,7 +18,7 @@ const Home = () => {
       )}
 
       <h1 className="text-3xl font-bold text-center mb-4 mt-2">
-        Welcome to 2025 Research Poster Competition & Experiential Learning Expo & Three Minute Thesis!
+        Welcome to 2026 Research Poster Competition & Experiential Learning Expo & Three Minute Thesis!
       </h1>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl w-full mb-8">

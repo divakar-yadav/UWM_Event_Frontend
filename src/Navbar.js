@@ -86,7 +86,7 @@ function NavigationBar() {
               </Nav>
             ) : (
               <Nav className="me-auto">
-                <Nav.Link href="/">Student Research Poster Competition - 2025</Nav.Link>
+                <Nav.Link href="/">Student Research Poster Competition - 2026</Nav.Link>
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/login">Login</Nav.Link>
                 <Nav.Link href="/signup">Register</Nav.Link>

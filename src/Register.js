@@ -28,7 +28,7 @@ function Register() {
 
   useEffect(() => {
     if (last_name) {
-      setPassword(last_name.toLowerCase().replace(/\s/g, '') + "2025");
+      setPassword(last_name.toLowerCase().replace(/\s/g, '') + "2026");
 
     }
   }, [last_name]);
@@ -112,7 +112,7 @@ function Register() {
   return (
     <>
 
-      <CountdownTimer targetDate={new Date('2025-04-26T08:00:00-05:00')} />
+      <CountdownTimer targetDate={new Date('2026-04-26T08:00:00-05:00')} />
 
       <div className="min-h-screen bg-gradient-to-r from-ffbd00 to-[#eca600] flex items-center justify-center pt-12 pb-8">
         <div className="bg-white shadow-md rounded-lg p-8  w-full md:w-96 lg:w-1/2 mx-4 md:mx-0">
@@ -243,7 +243,7 @@ function Register() {
               <h5>Important:</h5>
               <ul>
                 <li>Your password will be automatically assigned and populated into the field below.</li> <br />
-                <li>Your password will be your last name, followed by 2025. If your last name is Smith, your password will be smith2025.</li> <br />
+                <li>Your password will be your last name, followed by 2026. If your last name is Smith, your password will be smith2026.</li> <br />
                 <li>On the day of the event, you will login using the email you are providing now and the automatically provided password.</li> <br />
               </ul>
             </div>
@@ -251,7 +251,7 @@ function Register() {
               <p>Important:</p>
               <ul>
                 <li>Your password will be automatically assigned and populated into the field below.</li> <br />
-                <li>Your password will be your last name, followed by 2025. If your last name is Smith, your password will be Smith2025.</li> <br />
+                <li>Your password will be your last name, followed by 2026. If your last name is Smith, your password will be Smith2026.</li> <br />
                 <li>On the day of the event, you will login using the email you are providing now and the automatically provided password.</li> <br />
               </ul>
             </div>
@@ -282,12 +282,12 @@ function Register() {
               {last_name ? (
                 <Form.Control
                   type="text"
-                  placeholder="Your password will be your Last Name followed by 2025"
-                  value={last_name.toLowerCase().replace(/\s/g, '') + "2025"} onChange={(e) => setPassword(e.target.value)} disabled />
+                  placeholder="Your password will be your Last Name followed by 2026"
+                  value={last_name.toLowerCase().replace(/\s/g, '') + "2026"} onChange={(e) => setPassword(e.target.value)} disabled />
               ) : (
                 <Form.Control
                   type="text"
-                  placeholder="Your password will be your Last Name followed by 2025"
+                  placeholder="Your password will be your Last Name followed by 2026"
                   value={password} onChange={(e) => setPassword(e.target.value)} disabled />
               )
               }
