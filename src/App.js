@@ -26,14 +26,35 @@ import AdminDashboardPanel from "./AdminDashboardPanel"; // Admin dashboard comp
 // PrivateRoute component for protected routes
 import PrivateRoute from "./PrivateRoute";
 import ThreeMT from "./ThreeMT";
+import DashboardLogin from "./DashboardLogin";
 import ServerErrorPage from "./500";
 // Main App component which holds the structure of the entire application
 function App() {
   // Helper function to concatenate the API URL with a path
+
+
+  const host = window.location.hostname;
+  const isDashboardHost = host.startsWith("dashboard.");
   function getApiUrl(path) {
     return `${process.env.REACT_APP_API_URL}${path}`;
   }
-
+if (isDashboardHost) {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/login" element={<DashboardLogin />} />
+        <Route
+          path="/*"
+          element={
+            <PrivateRoute>
+              <AdminDashboardPanel />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </Router>
+  );
+}
   // JSX structure for the App component
   return (
     <>
@@ -63,7 +84,7 @@ function App() {
             <Route path="/editscore/1/research-poster/:posterId" element={<PrivateRoute scoring_type={'research-poster'} permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><EditRound round={1} /></PrivateRoute>} />
             <Route path="/editscore/threemt/:posterId" element={<PrivateRoute  scoring_type={'threemt'} permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><ThreeMtEdit round={1} /></PrivateRoute>} />
             <Route path="/editscore/1/explearning/:posterId" element={<PrivateRoute scoring_type={'explearning'}  permissionCheckUrl={getApiUrl("/precheckposter/round1_pre_check_edit/:id")}><ExpLearningEdit round={1} /></PrivateRoute>} />
-            <Route path="/pa-283771828"element={<PrivateRoute><AdminDashboardPanel /></PrivateRoute>}/>
+            {/* <Route path="/pa-283771828"element={<PrivateRoute><AdminDashboardPanel /></PrivateRoute>}/> */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
