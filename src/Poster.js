@@ -93,7 +93,10 @@ function Judgeinfo({ judge }) {
         <h1 className="text-4xl font-bold text-center mb-6 animate__animated animate__fadeInDown">
           Research Poster Score Entry
         </h1>
-        <h2 className="text-center mb-4">Welcome {judge}!</h2>
+        <h2 className="text-center mb-4">Welcome</h2>
+        <h3 className="text-center mb-4">
+          <strong>{judge}</strong>
+        </h3>
         <br />
         <div>
           <p className="mb-4">
@@ -161,7 +164,7 @@ function Roundone({ finalistPosterId, round1PosterId, setRound1PosterId, posterE
                 Poster ID Number
               </label>
               <input
-                type="number"
+                type="text"
                 inputMode="numeric"
                 //min = "100"
                 //max = "299"

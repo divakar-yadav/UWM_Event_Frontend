@@ -19,8 +19,7 @@ function EditRound({ round }) {
   const [communicationScore, setCommunicationScore] = useState("");
   const [presentationScore, setPresentationScore] = useState("");
   const [feedback, setFeedback] = useState("");
-  
-  
+
 
   useEffect(() => {
     document.title = `Edit Poster Score`;
@@ -221,7 +220,24 @@ function Scoringfields({
       setLoading(false);
     }
   };
+  
+  const handleDecimalChange = (setter) => (e) => {
+  let value = e.target.value;
 
+  value = value.replace(/[^0-9.]/g, "");
+
+  const parts = value.split(".");
+  if (parts.length > 2) {
+    value = parts[0] + "." + parts.slice(1).join("");
+  }
+
+  if (value.includes(".")) {
+    const [whole, decimal] = value.split(".");
+    value = `${whole}.${decimal.slice(0, 2)}`;
+  }
+
+  setter(value);
+};
   return (
     <>
       <div className="bg-white shadow-md rounded-lg p-8 mb-6">
@@ -231,11 +247,13 @@ function Scoringfields({
               Research Score (0-50)
             </label>
             <input
-              type="number"
+              type="text"
+              inputMode="decimal"
+              pattern="^\d*\.?\d{0,2}$"
               className="w-full border px-3 py-2 rounded"
               id="researchScore"
               value={researchScore}
-              onChange={(e) => setResearchScore(e.target.value)}
+              onChange={handleDecimalChange(setResearchScore)}
               onWheel={(e) => e.target.blur()}
             />{researchError && <p className="text-red-500 text-sm">{researchError}</p>}
           </div>
@@ -244,11 +262,13 @@ function Scoringfields({
               Communication Score (0-30)
             </label>
             <input
-              type="number"
+              type="text"
+              inputMode="decimal"
+              pattern="^\d*\.?\d{0,2}$"
               className="w-full border px-3 py-2 rounded"
               id="communicationScore"
               value={communicationScore}
-              onChange={(e) => setCommunicationScore(e.target.value)}
+              onChange={handleDecimalChange(setCommunicationScore)}
               onWheel={(e) => e.target.blur()}
             /> {communicationError && <p className="text-red-500 text-sm">{communicationError}</p>}
           </div>
@@ -257,11 +277,13 @@ function Scoringfields({
               Presentation Score (0-20)
             </label>
             <input
-              type="number"
+              type="text"
+              inputMode="decimal"
+              pattern="^\d*\.?\d{0,2}$"
               className="w-full border px-3 py-2 rounded"
               id="presentationScore"
               value={presentationScore}
-              onChange={(e) => setPresentationScore(e.target.value)}
+              onChange={handleDecimalChange(setPresentationScore)}
               onWheel={(e) => e.target.blur()}
             />{presentationError && <p className="text-red-500 text-sm">{presentationError}</p>}
           </div>

@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default function AdminDashboardPanel() {
   const [isSuperUser, setIsSuperUser] = useState(null);
-  const [category, setCategory] = useState("3mt");
+  const [category, setCategory] = useState("respost");
   const [view, setView] = useState("scores");
   const [data, setData] = useState([]);
   const [aggregateDataUG, setAggregateDataUG] = useState([]);
@@ -402,10 +402,10 @@ const sortArrow = (k) =>
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           className="border p-2 rounded w-full sm:w-auto"
-        >
-          <option value="3mt">Three Minute Thesis (3MT)</option>
-          <option value="exp">Experiential Learning</option>
+        >     
           <option value="respost">Research Poster</option>
+          <option value="exp">Experiential Learning</option>
+          <option value="3mt">Three Minute Thesis (3MT)</option>
         </select>
         <button
           onClick={exportToExcel}

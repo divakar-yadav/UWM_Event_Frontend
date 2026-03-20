@@ -124,7 +124,10 @@ function JudgeInfo({ judge }) {
           Three Minute Thesis Score Entry
         </h1>
         
-        <h2 className="text-center mb-4">Welcome {judge}!</h2>
+        <h2 className="text-center mb-4">Welcome</h2>
+        <h3 className="text-center mb-4">
+          <strong>{judge}</strong>
+        </h3>
         <p className="mb-4">
         <strong>
     Thank you for being a judge today! Click "Begin Judging" to enter each Three Minute Thesis score. You can edit your scores later if necessary. Check "Rubric" in

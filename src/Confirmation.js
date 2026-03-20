@@ -1,55 +1,59 @@
-// Import React and necessary styles
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './index.css';
-// Import images used in the component
 import successLogo from './images/new_logo_stacked.jpg';
 import doneGif from './images/done.gif';
 
-// Confirmation component used to display the success message after a user action (e.g., registration)
 function Confirmation() {
+    const navigate = useNavigate();
+
     return (
         <>
-            {/* Full screen container with a background gradient */}
-            <div className="min-h-screen bg-gradient-to-r from-ffbd00 to-[#eca600]">
-                {/* Top margin for spacing */}
+            <div className="min-h-screen bg-gradient-to-r from-[#ffbd00] to-[#eca600]">
                 <br />
-                {/* Centered container for the content */}
-                <div className="container mx-auto px-4 ">
-                    {/* Text-center aligns all children to the center */}
+                <div className="container mx-auto px-4">
                     <div id="successcontainer" className="text-center">
-                        {/* Logo image for visual confirmation of success */}
                         <img
                             id="image"
                             src={successLogo}
                             alt="success logo"
                             className="mx-auto"
                         />
-                        {/* Spacing between elements */}
+
                         <br />
-                        {/* Event title and date information */}
+
                         <h3 className="text-xl font-semibold my-4">
-                            2025 Student Research Poster Competition
+                            Student Research Poster Competition
                         </h3>
-                        {/* Confirmation message for the user */}
+
                         <p className="text-xl mb-4">
                             Thank you for registering to be a judge.
-                            <br />
-                            {/* Contact information in case of questions */}
-                            {/* <b className="font-bold">
-                                Questions? Contact ceas-events@uwm.edu
-                            </b> */}
                         </p>
-                        {/* Additional spacing */}
+
+                        <p className="text-md mb-6">
+                            Your registration has been submitted successfully. Please continue to the login page.
+                        </p>
+
                         <br />
-                        {/* Animated GIF for visual feedback */}
-                        {/* <img id="image" src={doneGif} alt="done" className="mx-auto" />*/}
+
+                        {/* <img id="image" src={doneGif} alt="done" className="mx-auto" /> */}
+
                         <div className="mx-auto w-[90px]">
-                        <svg className="circle-check" viewBox="0 0 52 52">
-                            <circle className="fill-circle" cx="26" cy="26" r="25" />
-                            <path className="check" d="M16 27l8 8 14-16" />
-                        </svg>
+                            <svg className="circle-check" viewBox="0 0 52 52">
+                                <circle className="fill-circle" cx="26" cy="26" r="25" />
+                                <path className="check" d="M16 27l8 8 14-16" />
+                            </svg>
                         </div>
-                        {/* Placeholder for potential status messages */}
+
+                        <div className="mt-6 flex justify-center">
+                            <button
+                                onClick={() => navigate('/login')}
+                                className="md:hidden w-full max-w-xs bg-black text-white px-6 py-3 rounded-lg font-medium hover:opacity-80 transition"
+                            >
+                                Login
+                            </button>
+                        </div>
+
                         <p id="status" className="text-sm mt-2"></p>
                     </div>
                 </div>
@@ -58,5 +62,4 @@ function Confirmation() {
     );
 }
 
-// Export the component for use in other parts of the application
 export default Confirmation;
