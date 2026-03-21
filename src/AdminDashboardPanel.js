@@ -86,7 +86,102 @@ const numericValue = (value) => {
   const n = Number(value);
   return Number.isFinite(n) ? n : -Infinity;
 };
+const NUMERIC_FILTER_KEYS = new Set([
+  "poster_id",
+  "avg_score",
+  "judge_count",
+  "posters_scored_count",
+  "total_posters",
+]);
 
+const FILTER_PLACEHOLDERS = {
+  student_name: "Filter by student name",
+  judge_first_name: "Filter by judge name",
+  judge_email: "Filter by judge email",
+  poster_id: "Filter by poster ID",
+  avg_score: "Filter by average score",
+  judge_count: "Filter by judge count",
+  posters_scored_count: "Filter by posters scored",
+  total_posters: "Filter by total posters",
+  scored_by: "Filter by scored progress (e.g. 1/4)",
+  poster_ids: "Filter by poster IDs",
+  student: "Filter by student name",
+};
+
+const normalizeFilterValue = (key, value) => {
+  const raw = String(value ?? "");
+  return NUMERIC_FILTER_KEYS.has(key)
+    ? raw.replace(/[^\d]/g, "")
+    : raw.toLowerCase().trim();
+};
+const SORT_OPTIONS = {
+  scores: [
+    { value: "student_name", label: "Student Name" },
+    { value: "poster_id", label: "Poster ID" },
+    { value: "avg_score", label: "Average Score" },
+    { value: "judge_count", label: "Judge Count" },
+  ],
+  judge: [
+    { value: "judge_first_name", label: "Judge Name" },
+    { value: "judge_email", label: "Judge Email" },
+    { value: "posters_scored_count", label: "Posters Scored" },
+    { value: "poster_ids", label: "Poster IDs" },
+  ],
+  student: [
+    { value: "student", label: "Student Name" },
+    { value: "poster_id", label: "Poster ID" },
+    { value: "scored_by", label: "Scored Progress" },
+  ],
+};
+const normalizeCellValue = (key, value) => {
+  const raw = String(value ?? "");
+  return NUMERIC_FILTER_KEYS.has(key)
+    ? raw.replace(/[^\d]/g, "")
+    : raw.toLowerCase();
+};
+function MobileSortControls({ theme, view, sortConfig, setSortConfig }) {
+  return (
+    <div style={{ ...raised(theme, 18), padding: 12 }} className="grid grid-cols-1 gap-3 lg:hidden">
+      <select
+        value={sortConfig.key || ""}
+        onChange={(e) =>
+          setSortConfig((prev) => ({
+            ...prev,
+            key: e.target.value || null,
+          }))
+        }
+        className="w-full px-4 py-3 text-sm font-bold focus:outline-none focus-visible:ring-4"
+        style={{ ...inset(theme, 14), color: theme.text, "--tw-ring-color": theme.ring }}
+        aria-label="Sort field"
+      >
+        <option value="" style={{ color: "#111" }}>
+          Sort by...
+        </option>
+        {SORT_OPTIONS[view].map((opt) => (
+          <option key={opt.value} value={opt.value} style={{ color: "#111" }}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
+
+      <select
+        value={sortConfig.direction}
+        onChange={(e) =>
+          setSortConfig((prev) => ({
+            ...prev,
+            direction: e.target.value,
+          }))
+        }
+        className="w-full px-4 py-3 text-sm font-bold focus:outline-none focus-visible:ring-4"
+        style={{ ...inset(theme, 14), color: theme.text, "--tw-ring-color": theme.ring }}
+        aria-label="Sort direction"
+      >
+        <option value="asc" style={{ color: "#111" }}>Ascending</option>
+        <option value="desc" style={{ color: "#111" }}>Descending</option>
+      </select>
+    </div>
+  );
+}
 function ControlCard({ theme, label, children }) {
   return (
     <div
@@ -301,14 +396,15 @@ function MetricCard({ title, value, theme, accent = false }) {
   );
 }
 
-function FilterInput({ value, onChange, placeholder, theme, ariaLabel }) {
+function FilterInput({ value, onChange, placeholder, theme, ariaLabel, inputMode = "text" }) {
   return (
     <input
       value={value}
       onChange={onChange}
       placeholder={placeholder}
       aria-label={ariaLabel}
-      className="w-full px-3 py-2 text-sm focus:outline-none focus-visible:ring-4"
+      inputMode={inputMode}
+      className="w-full px-3 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-4"
       style={{
         ...inset(theme, 12),
         color: theme.text,
@@ -317,7 +413,6 @@ function FilterInput({ value, onChange, placeholder, theme, ariaLabel }) {
     />
   );
 }
-
 // function SelectBox({ id, value, onChange, theme, children, disabled = false, ariaLabel }) {
 //   return (
 //     <select
@@ -362,7 +457,7 @@ function MobileRowCard({ view, item, theme }) {
             <div className="text-[11px] font-black uppercase tracking-wide" style={{ color: theme.muted }}>
               Average Score
             </div>
-            <div className="text-lg font-black" style={{ color: theme.goldDeep }}>
+            <div className="text-lg font-black" style={{ color: theme.text }}>
               {item.avg_score}
             </div>
           </div>
@@ -386,12 +481,12 @@ function MobileRowCard({ view, item, theme }) {
             </div>
             <div style={{ color: theme.text }}>{item.posters_scored_count}</div>
           </div>
-          <div>
+          {/* <div>
             <div className="text-[11px] font-black uppercase tracking-wide" style={{ color: theme.muted }}>
               Total Posters
             </div>
             <div style={{ color: theme.text }}>{item.total_posters}</div>
-          </div>
+          </div> */}
           <div className="col-span-2 break-words">
             <div className="text-[11px] font-black uppercase tracking-wide" style={{ color: theme.muted }}>
               Poster IDs
@@ -414,7 +509,7 @@ function MobileRowCard({ view, item, theme }) {
           </div>
           <div>
             <div className="text-[11px] font-black uppercase tracking-wide" style={{ color: theme.muted }}>
-              Scored By
+              Scored Progress
             </div>
             <div style={{ color: theme.text }}>{item.scored_by}</div>
           </div>
@@ -454,7 +549,7 @@ function AggregateTable({ students, theme }) {
                 <td className="px-4 py-4" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>
                   {student.poster_id >= 101 && student.poster_id <= 199 ? "UG" : "Grad"}
                 </td>
-                <td className="px-4 py-4 font-black" style={{ color: theme.goldDeep, borderBottom: `1px solid ${theme.border}` }}>
+                <td className="px-4 py-4 font-black" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>
                   {student.avg_score}
                 </td>
               </tr>
@@ -477,7 +572,7 @@ function AggregateTable({ students, theme }) {
               </div>
               <div
                 className="shrink-0 rounded-full px-3 py-1 text-sm font-black"
-                style={{ background: theme.gold, color: "#111111" }}
+                style={{ ...raised(theme, 999), color: theme.text }}
               >
                 {student.avg_score}
               </div>
@@ -591,9 +686,11 @@ export default function AdminDashboardPanel() {
   };
 
   const setFilter = (key, value) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
-  };
-
+  setFilters((prev) => ({
+    ...prev,
+    [key]: NUMERIC_FILTER_KEYS.has(key) ? value.replace(/[^\d]/g, "") : value,
+  }));
+};
   const requestSort = (key) => {
     setSortConfig((prev) => {
       if (prev.key === key) {
@@ -732,72 +829,75 @@ const fetchAggregateData = useCallback(() => {
 }, [API_URL, category, token]);
 
   const rows = useMemo(() => {
-    if (view === "judge") {
-      return data.map((x) => ({
-        judge_first_name: x.judge_first_name ?? "",
-        judge_email: x.judge_email ?? "",
-        posters_scored_count:
-          x.posters_scored_count ?? (Array.isArray(x.posters_scored) ? x.posters_scored.length : 0),
-        total_posters: x.total_posters ?? x.total_scored ?? 0,
-        poster_ids: Array.isArray(x.posters_scored) ? x.posters_scored.join(", ") : "",
-      }));
-    }
-
-    if (view === "scores") {
-      return data.map((x) => ({
-        student_name: x.student__Name ?? x.Student__Name ?? "",
-        poster_id: x.student__poster_ID ?? x.Student__poster_ID ?? "",
-        avg_score: x.avg_score ?? "",
-        judge_count: x.judge_count ?? "",
-      }));
-    }
-
+  if (view === "judge") {
     return data.map((x) => ({
-      student: x.student ?? "",
-      poster_id: x.poster_id ?? "",
-      scored_by: `${x.scored ?? 0}/${x.total ?? 0}`,
+      judge_first_name: x.judge_first_name ?? "",
+      judge_email: x.judge_email ?? "",
+      posters_scored_count:
+        x.posters_scored_count ?? (Array.isArray(x.posters_scored) ? x.posters_scored.length : 0),
+      // total_posters: x.total_posters ?? x.total_scored ?? 0,
+      poster_ids:
+        Array.isArray(x.posters_scored) && x.posters_scored.length > 0
+          ? x.posters_scored.join(", ")
+          : "No posters scored yet",
     }));
-  }, [data, view]);
+  }
+
+  if (view === "scores") {
+    return data.map((x) => ({
+      student_name: x.student__Name ?? x.Student__Name ?? "",
+      poster_id: x.student__poster_ID ?? x.Student__poster_ID ?? "",
+      avg_score: x.avg_score ?? "",
+      judge_count: x.judge_count ?? "",
+    }));
+  }
+
+  return data.map((x) => ({
+    student: x.student ?? "",
+    poster_id: x.poster_id ?? "",
+    scored_by: `${x.scored ?? 0}/${x.total ?? 0}`,
+  }));
+}, [data, view]);
 
   const columns = useMemo(() => {
-    if (view === "judge") return ["judge_first_name", "judge_email", "posters_scored_count", "total_posters", "poster_ids"];
+    if (view === "judge") return ["judge_first_name", "judge_email", "posters_scored_count",  "poster_ids"];
     if (view === "scores") return ["student_name", "poster_id", "avg_score", "judge_count"];
     return ["student", "poster_id", "scored_by"];
   }, [view]);
 
   const tableRows = useMemo(() => {
-    const filtered = [...rows].filter((row) =>
-      columns.every((col) => {
-        const f = (filters[col] ?? "").toString().trim().toLowerCase();
-        if (!f) return true;
-        const v = (row[col] ?? "").toString().toLowerCase();
-        return v.includes(f);
-      })
-    );
+  const filtered = [...rows].filter((row) =>
+    columns.every((col) => {
+      const f = normalizeFilterValue(col, filters[col] ?? "");
+      if (!f) return true;
+      const v = normalizeCellValue(col, row[col]);
+      return v.includes(f);
+    })
+  );
 
-    const { key, direction } = sortConfig;
-    if (!key) return filtered;
+  const { key, direction } = sortConfig;
+  if (!key) return filtered;
 
-    filtered.sort((a, b) => {
-      const va = a[key];
-      const vb = b[key];
+  filtered.sort((a, b) => {
+    const va = a[key];
+    const vb = b[key];
 
-      const na = Number(va);
-      const nb = Number(vb);
-      const bothNumeric = !Number.isNaN(na) && !Number.isNaN(nb);
+    const na = Number(va);
+    const nb = Number(vb);
+    const bothNumeric = !Number.isNaN(na) && !Number.isNaN(nb);
 
-      if (bothNumeric) return direction === "asc" ? na - nb : nb - na;
+    if (bothNumeric) return direction === "asc" ? na - nb : nb - na;
 
-      const sa = (va ?? "").toString().toLowerCase();
-      const sb = (vb ?? "").toString().toLowerCase();
+    const sa = String(va ?? "").toLowerCase();
+    const sb = String(vb ?? "").toLowerCase();
 
-      if (sa < sb) return direction === "asc" ? -1 : 1;
-      if (sa > sb) return direction === "asc" ? 1 : -1;
-      return 0;
-    });
+    if (sa < sb) return direction === "asc" ? -1 : 1;
+    if (sa > sb) return direction === "asc" ? 1 : -1;
+    return 0;
+  });
 
-    return filtered;
-  }, [rows, columns, filters, sortConfig]);
+  return filtered;
+}, [rows, columns, filters, sortConfig]);
 
   const stats = useMemo(() => {
     const scoreRows = tableRows.filter((row) => !Number.isNaN(Number(row.avg_score)));
@@ -845,10 +945,9 @@ const fetchAggregateData = useCallback(() => {
   }, [category, tableRows, view]);
 
   const sortArrow = (key) => {
-    if (sortConfig.key !== key) return "";
-    return sortConfig.direction === "asc" ? " ▲" : " ▼";
-  };
-
+  if (sortConfig.key !== key) return " ↕";
+  return sortConfig.direction === "asc" ? " ↑" : " ↓";
+};
   if (canAccessDashboard === null) {
     return (
       <div
@@ -941,6 +1040,44 @@ const fetchAggregateData = useCallback(() => {
               </>
             )}
           </div>
+          <section className="mt-6" aria-label="Dashboard view switcher">
+  <div style={{ ...raised(theme, 18), padding: 8 }}>
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <ClayButton
+        theme={theme}
+        active={view === "scores"}
+        variant={view === "scores" ? "gold" : "default"}
+        onClick={() => setView("scores")}
+        className="w-full min-h-[64px] text-base sm:text-lg"
+        ariaLabel="Show scores view"
+      >
+        Scores View
+      </ClayButton>
+
+      <ClayButton
+        theme={theme}
+        active={view === "judge"}
+        variant={view === "judge" ? "gold" : "default"}
+        onClick={() => setView("judge")}
+        className="w-full min-h-[64px] text-base sm:text-lg"
+        ariaLabel="Show judge view"
+      >
+        Judge View
+      </ClayButton>
+
+      <ClayButton
+        theme={theme}
+        active={view === "student"}
+        variant={view === "student" ? "gold" : "default"}
+        onClick={() => setView("student")}
+        className="w-full min-h-[64px] text-base sm:text-lg"
+        ariaLabel="Show student view"
+      >
+        Student View
+      </ClayButton>
+    </div>
+  </div>
+</section>
   <section
   className="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-12 items-stretch"
   aria-label="Dashboard controls"
@@ -1158,7 +1295,7 @@ const fetchAggregateData = useCallback(() => {
                             Posters Scored{sortArrow("posters_scored_count")}
                           </button>
                         </th>
-                        <th className="px-4 py-4 text-left" style={{ borderBottom: `1px solid ${theme.border}` }}>
+                        {/* <th className="px-4 py-4 text-left" style={{ borderBottom: `1px solid ${theme.border}` }}>
                           <button
                             type="button"
                             onClick={() => requestSort("total_posters")}
@@ -1167,7 +1304,7 @@ const fetchAggregateData = useCallback(() => {
                           >
                             Total Posters{sortArrow("total_posters")}
                           </button>
-                        </th>
+                        </th> */}
                         <th className="px-4 py-4 text-left" style={{ borderBottom: `1px solid ${theme.border}` }}>
                           <button
                             type="button"
@@ -1210,26 +1347,27 @@ const fetchAggregateData = useCallback(() => {
                             className="font-black focus:outline-none focus-visible:ring-4"
                             style={{ color: theme.text, background: "transparent", border: "none", "--tw-ring-color": theme.ring }}
                           >
-                            Scored By{sortArrow("scored_by")}
+                            Scored Progress{sortArrow("scored_by")}
                           </button>
                         </th>
                       </>
                     )}
                   </tr>
 
-                  <tr>
-                    {columns.map((col) => (
-                      <th key={col} className="px-3 py-3" style={{ borderBottom: `1px solid ${theme.border}` }}>
-                        <FilterInput
-                          value={filters[col] || ""}
-                          onChange={(e) => setFilter(col, e.target.value)}
-                          placeholder="filter..."
-                          theme={theme}
-                          ariaLabel={`Filter ${col}`}
-                        />
-                      </th>
-                    ))}
-                  </tr>
+                                  <tr>
+                  {columns.map((col) => (
+                    <th key={col} className="px-3 py-3" style={{ borderBottom: `1px solid ${theme.border}` }}>
+                      <FilterInput
+                        value={filters[col] || ""}
+                        onChange={(e) => setFilter(col, e.target.value)}
+                        placeholder={FILTER_PLACEHOLDERS[col] || "Filter"}
+                        theme={theme}
+                        ariaLabel={FILTER_PLACEHOLDERS[col] || `Filter ${col}`}
+                        inputMode={NUMERIC_FILTER_KEYS.has(col) ? "numeric" : "text"}
+                      />
+                    </th>
+                  ))}
+                </tr>
                 </thead>
 
                 <tbody>
@@ -1240,7 +1378,7 @@ const fetchAggregateData = useCallback(() => {
                           <>
                             <td className="px-4 py-4" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>{item.student_name}</td>
                             <td className="px-4 py-4" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>{item.poster_id}</td>
-                            <td className="px-4 py-4 font-black" style={{ color: theme.goldDeep, borderBottom: `1px solid ${theme.border}` }}>{item.avg_score}</td>
+                            <td className="px-4 py-4 font-black" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>{item.avg_score}</td>
                             <td className="px-4 py-4" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>{item.judge_count}</td>
                           </>
                         )}
@@ -1250,7 +1388,7 @@ const fetchAggregateData = useCallback(() => {
                             <td className="px-4 py-4" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>{item.judge_first_name}</td>
                             <td className="px-4 py-4 break-all" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>{item.judge_email}</td>
                             <td className="px-4 py-4" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>{item.posters_scored_count}</td>
-                            <td className="px-4 py-4" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>{item.total_posters}</td>
+                            {/* <td className="px-4 py-4" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>{item.total_posters}</td> */}
                             <td className="px-4 py-4 break-words" style={{ color: theme.text, borderBottom: `1px solid ${theme.border}` }}>{item.poster_ids}</td>
                           </>
                         )}
@@ -1276,20 +1414,28 @@ const fetchAggregateData = useCallback(() => {
             </div>
 
             <div className="grid grid-cols-1 gap-4 lg:hidden">
+              <MobileSortControls
+                theme={theme}
+                view={view}
+                sortConfig={sortConfig}
+                setSortConfig={setSortConfig}
+              />
+
               <div style={{ ...raised(theme, 18), padding: 12 }}>
-                <div className="grid grid-cols-1 gap-3">
-                  {columns.map((col) => (
-                    <FilterInput
-                      key={col}
-                      value={filters[col] || ""}
-                      onChange={(e) => setFilter(col, e.target.value)}
-                      placeholder={`filter ${col}`}
-                      theme={theme}
-                      ariaLabel={`Filter ${col}`}
-                    />
-                  ))}
-                </div>
+              <div className="grid grid-cols-1 gap-3">
+                {columns.map((col) => (
+                  <FilterInput
+                    key={col}
+                    value={filters[col] || ""}
+                    onChange={(e) => setFilter(col, e.target.value)}
+                    placeholder={FILTER_PLACEHOLDERS[col] || `Filter ${col}`}
+                    theme={theme}
+                    ariaLabel={FILTER_PLACEHOLDERS[col] || `Filter ${col}`}
+                    inputMode={NUMERIC_FILTER_KEYS.has(col) ? "numeric" : "text"}
+                  />
+                ))}
               </div>
+            </div>
 
               {tableRows.length > 0 ? (
                 tableRows.map((item, idx) => <MobileRowCard key={idx} view={view} item={item} theme={theme} />)
